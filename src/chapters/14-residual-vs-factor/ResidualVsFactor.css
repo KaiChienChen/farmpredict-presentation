@@ -1,4 +1,4 @@
-/* ── Chapter 14 · residual-vs-factor ── */
+﻿/* ── Chapter 14 · residual-vs-factor ── */
 
 .rv-scene {
   position: absolute;
@@ -36,14 +36,14 @@
 .rv-config-card--accent { border: 1.5px solid var(--accent); }
 .rv-config-label {
   font-family: var(--font-display-cn);
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 700;
   color: var(--text);
 }
 .rv-config-card--accent .rv-config-label { color: var(--accent); }
-.rv-config-desc { font-size: 14px; color: var(--text-mute); }
+.rv-config-desc { font-size: 17px; color: var(--text-mute); }
 .rv-design-note {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--text-mute);
   border-top: 1px solid var(--rule);
   padding-top: 16px;
@@ -60,11 +60,11 @@
 }
 .rv-results-chart { flex: 3; display: flex; flex-direction: column; gap: 24px; }
 .rv-results-r2 { flex: 1; display: flex; flex-direction: column; gap: 24px; padding-top: 28px; }
-.rv-chart-head { font-size: 13px; margin-bottom: 4px; flex-shrink: 0; }
+.rv-chart-head { font-size: 16px; margin-bottom: 4px; flex-shrink: 0; }
 .rv-bar-group { display: flex; align-items: center; gap: 16px; }
 .rv-bar-label {
   font-family: var(--font-display-cn);
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 600;
   color: var(--text-mute);
   min-width: 120px;
@@ -90,7 +90,7 @@
   top: 50%;
   transform: translateY(-50%);
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 19px;
   color: var(--surface);
   transition: opacity 400ms ease;
 }
@@ -102,13 +102,13 @@
 .rv-r2-val {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 28px;
+  font-size: 34px;
   color: var(--text-mute);
   transition: opacity 400ms ease;
 }
 .rv-r2-neg { color: var(--text-faint); }
 .rv-result-insight {
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-mute);
   border-left: 3px solid var(--accent);
   padding-left: 20px;
@@ -137,19 +137,19 @@
   gap: 20px;
   padding: 24px 28px;
 }
-.rv-why-example-text { font-size: 17px; }
+.rv-why-example-text { font-size: 21px; }
 .rv-why-arrow {
   font-family: var(--font-mono);
-  font-size: 28px;
+  font-size: 34px;
   color: var(--text-faint);
   flex-shrink: 0;
 }
 .rv-why-example-conclusion { display: flex; align-items: center; gap: 12px; }
 .rv-why-x {
-  font-size: 28px;
+  font-size: 34px;
   color: var(--text-mute);
 }
-.rv-why-note { font-size: 16px; }
+.rv-why-note { font-size: 20px; }
 .rv-why-split { display: flex; gap: 24px; flex: 1; }
 .rv-why-box {
   flex: 1;
@@ -160,15 +160,15 @@
 }
 .rv-why-box-head {
   font-family: var(--font-display-cn);
-  font-size: 22px;
+  font-size: 27px;
   font-weight: 700;
   color: var(--text-mute);
 }
 .rv-why-box--signal .rv-why-box-head { color: var(--accent); }
-.rv-why-box-body { font-size: 15px; line-height: 1.7; }
+.rv-why-box-body { font-size: 19px; line-height: 1.7; }
 .rv-why-box-tag {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 15px;
   color: var(--text-faint);
   margin-top: auto;
 }
@@ -198,13 +198,13 @@
   transition: opacity 600ms ease, transform 600ms ease;
 }
 .rv-meth-path.is-lit { opacity: 1; transform: translateY(0); }
-.rv-meth-path-tag { font-size: 14px; }
+.rv-meth-path-tag { font-size: 17px; }
 .rv-meth-path--wrong .rv-meth-path-tag { color: var(--text-faint); }
 .rv-meth-path--right .rv-meth-path-tag { color: var(--accent); }
 .rv-meth-path-flow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .rv-meth-node {
   font-family: var(--font-display-cn);
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 600;
   padding: 6px 14px;
   background: var(--surface-3);
@@ -216,12 +216,12 @@
 .rv-meth-path--wrong .rv-meth-node--target { color: var(--text-faint); }
 .rv-meth-arrow {
   font-family: var(--font-mono);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-faint);
 }
-.rv-meth-path-note { font-size: 14px; color: var(--text-mute); }
+.rv-meth-path-note { font-size: 17px; color: var(--text-mute); }
 .rv-meth-footer {
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-mute);
   border-top: 1px solid var(--rule);
   padding-top: 16px;

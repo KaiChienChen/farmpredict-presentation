@@ -1,4 +1,4 @@
-/* ── Chapter 09 · data ── */
+﻿/* ── Chapter 09 · data ── */
 
 .dt-scene {
   position: absolute;
@@ -28,7 +28,7 @@
   line-height: 1;
   color: var(--text);
 }
-.dt-hero-label { font-size: 14px; }
+.dt-hero-label { font-size: 17px; }
 .dt-crawler-stats { display: flex; flex-direction: column; gap: 16px; }
 .dt-stat {}
 .dt-stat-val {
@@ -38,9 +38,9 @@
   color: var(--text-mute);
   line-height: 1.2;
 }
-.dt-stat-sub { font-size: 13px; }
+.dt-stat-sub { font-size: 16px; }
 .dt-crawler-right { width: 340px; flex-shrink: 0; }
-.dt-bfs-title { font-size: 13px; margin-bottom: 12px; }
+.dt-bfs-title { font-size: 16px; margin-bottom: 12px; }
 .dt-bfs-svg {
   width: 100%;
   height: auto;
@@ -58,7 +58,7 @@
 }
 .dt-bfs-text {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 14px;
   fill: var(--text);
   text-anchor: middle;
   dominant-baseline: middle;
@@ -85,7 +85,7 @@
   align-items: center;
   gap: 20px;
 }
-.dt-funnel-label { font-size: 14px; }
+.dt-funnel-label { font-size: 17px; }
 .dt-funnel-bar-wrap {
   height: 24px;
   background: var(--surface-3);
@@ -104,12 +104,12 @@
 .dt-funnel-val {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-mute);
   text-align: right;
 }
 .dt-funnel-note {
-  font-size: 18px;
+  font-size: 22px;
   color: var(--text-mute);
   border-top: 1px solid var(--rule);
   padding-top: 20px;
@@ -155,10 +155,10 @@
 }
 .dt-beta-card.is-lit { opacity: 1; transform: translateY(0); }
 .dt-beta-card--goal.is-lit { border: 1.5px solid var(--accent); }
-.dt-beta-card-label { font-size: 12px; margin-bottom: 12px; }
+.dt-beta-card-label { font-size: 15px; margin-bottom: 12px; }
 .dt-beta-card-body {
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-mute);
   line-height: 1.6;
 }
@@ -178,15 +178,15 @@
   gap: 20px;
 }
 .dt-seg-demo { padding: 24px; }
-.dt-seg-label { font-size: 12px; margin-bottom: 14px; }
+.dt-seg-label { font-size: 15px; margin-bottom: 14px; }
 .dt-seg-raw {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-mute);
 }
 .dt-seg-arrow {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
   padding: 10px 0;
 }
@@ -198,7 +198,7 @@
 }
 .dt-seg-token {
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 22px;
   background: var(--accent-soft);
   color: var(--accent);
   padding: 4px 12px;
@@ -220,7 +220,7 @@
   min-width: 3px;
 }
 .dt-sparsity-zero { flex: 1; background: var(--surface-3); }
-.dt-sparsity-note { font-size: 12px; }
+.dt-sparsity-note { font-size: 15px; }
 .dt-vocab-right {
   width: 320px;
   flex-shrink: 0;
@@ -232,13 +232,13 @@
   padding: 16px 20px;
   transition: opacity 500ms ease, transform 500ms ease;
 }
-.dt-vocab-stat-label { font-size: 12px; margin-bottom: 4px; }
+.dt-vocab-stat-label { font-size: 15px; margin-bottom: 4px; }
 .dt-vocab-stat-val {
   font-size: 40px;
   line-height: 1.2;
   color: var(--text);
 }
-.dt-vocab-stat-sub { font-size: 13px; margin-top: 2px; }
+.dt-vocab-stat-sub { font-size: 16px; margin-top: 2px; }
 
 /* ── Step 4 · Window ───────────────────────────────────────────────────── */
 .dt-window-title {
@@ -264,7 +264,7 @@
 .dt-tl-seg--train { background: var(--surface-3); }
 .dt-tl-seg--val { background: var(--accent-soft); }
 .dt-tl-seg--test { background: var(--accent); }
-.dt-tl-label { font-size: 11px; color: var(--text-mute); white-space: nowrap; }
+.dt-tl-label { font-size: 14px; color: var(--text-mute); white-space: nowrap; }
 .dt-tl-seg--test .dt-tl-label { color: var(--surface); }
 .dt-windows-list {
   flex: 1;
@@ -284,14 +284,14 @@
   transform: translateX(-8px);
   transition: opacity 400ms ease, transform 400ms ease, border-color 400ms ease;
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 22px;
 }
 .dt-window-row.is-active {
   opacity: 1;
   transform: translateX(0);
   border-color: var(--rule);
 }
-.dt-window-num { font-size: 12px; min-width: 50px; }
+.dt-window-num { font-size: 15px; min-width: 50px; }
 .dt-window-train { color: var(--text-mute); flex: 1; }
 .dt-window-arrow { color: var(--text-faint); }
 .dt-window-test { color: var(--accent); font-weight: 600; min-width: 100px; }

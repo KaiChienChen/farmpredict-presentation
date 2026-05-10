@@ -101,7 +101,7 @@ function SceneKSens() {
               return (
                 <g key={v}>
                   <line x1={pad.left - 6} y1={cy} x2={pad.left + innerW} y2={cy} stroke="var(--rule)" strokeWidth={1} />
-                  <text x={pad.left - 10} y={cy + 4} textAnchor="end" fontSize={11} fill="var(--text-faint)">{v}</text>
+                  <text x={pad.left - 10} y={cy + 4} textAnchor="end" fontSize={14} fill="var(--text-faint)">{v}</text>
                 </g>
               );
             })}
@@ -109,7 +109,7 @@ function SceneKSens() {
             {K_POINTS.map((k, i) => {
               const cx = pad.left + (i / (K_POINTS.length - 1)) * innerW;
               return (
-                <text key={k} x={cx} y={H - 8} textAnchor="middle" fontSize={10} fill="var(--text-faint)">
+                <text key={k} x={cx} y={H - 8} textAnchor="middle" fontSize={12} fill="var(--text-faint)">
                   {k >= 1000 ? `${k / 1000}k` : k}
                 </text>
               );

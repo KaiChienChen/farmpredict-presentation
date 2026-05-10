@@ -1,4 +1,4 @@
-.at-hover {
+﻿.at-hover {
   position: fixed;
   top: 0;
   right: 0;
@@ -20,7 +20,7 @@
   -webkit-backdrop-filter: blur(20px);
   color: #f4f4f5;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: 0.18em;
   padding: 8px 14px;
   border-radius: 0 0 0 8px;

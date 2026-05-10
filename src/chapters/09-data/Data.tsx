@@ -56,7 +56,7 @@ function SceneCrawler() {
               <g key={i} style={{ opacity: nodes >= 2 ? 1 : 0, transition: `opacity 400ms ${i * 150}ms` }}>
                 <line x1="150" y1="52" x2={cx} y2="98" className="dt-bfs-line" />
                 <circle cx={cx} cy="115" r="20" className="dt-bfs-node" />
-                <text x={cx} y="120" className="dt-bfs-text" style={{ fontSize: 9 }}>
+                <text x={cx} y="120" className="dt-bfs-text" style={{ fontSize: 11 }}>
                   {["頻道A", "財報", "公告"][i]}
                 </text>
               </g>
@@ -66,7 +66,7 @@ function SceneCrawler() {
               <g key={i} style={{ opacity: nodes >= 5 ? 1 : 0, transition: `opacity 400ms ${i * 100}ms` }}>
                 <line x1={[70, 70, 150, 230, 230][i]!} y1="135" x2={cx} y2="178" className="dt-bfs-line" />
                 <circle cx={cx} cy="192" r="16" className="dt-bfs-node dt-bfs-node--leaf" />
-                <text x={cx} y="196" className="dt-bfs-text" style={{ fontSize: 8 }}>
+                <text x={cx} y="196" className="dt-bfs-text" style={{ fontSize: 10 }}>
                   {i < 4 ? `新聞${i + 1}` : "…"}
                 </text>
               </g>

@@ -1,4 +1,4 @@
-/* ─────────────────────────────────────────────────────────────────────
+﻿/* ─────────────────────────────────────────────────────────────────────
  * base.css — design system for the web-video-presentation skill.
  *
  * Ownership split:
@@ -50,8 +50,8 @@ body {
   --t-display-2:   clamp(80px, 7vw, 128px);
   --t-h1:          clamp(56px, 5vw, 88px);
   --t-h2:          clamp(40px, 3.6vw, 60px);
-  --t-body:        28px;
-  --t-micro:       18px;
+  --t-body:        34px;
+  --t-micro:       22px;
 
   /* ── Tracking presets (used by primitive classes) ── */
   --track-tight:   -0.025em;   /* large serif display */
@@ -208,7 +208,7 @@ body {
 }
 .kicker {
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 22px;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--text-mute);
@@ -290,12 +290,12 @@ body {
 .corner-mark .ord {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 28px;
+  font-size: 34px;
   line-height: 1;
   letter-spacing: 0;
   color: var(--text);
 }
-.corner-mark .slash { opacity: 0.3; font-size: 16px; }
+.corner-mark .slash { opacity: 0.3; font-size: 20px; }
 
 /* bottom-right next-step hint — fades on first step */
 .click-cue {
@@ -307,7 +307,7 @@ body {
   align-items: center;
   gap: var(--space-3);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: var(--track-caps);
   text-transform: uppercase;
   color: var(--text-mute);
@@ -320,7 +320,7 @@ body {
   display: inline-block;
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 20px;
+  font-size: 25px;
   letter-spacing: 0;
   animation: nudge 2.4s var(--ease-soft) infinite;
 }
@@ -338,7 +338,7 @@ body {
   border: var(--bw-1) solid var(--rule);
   border-radius: var(--r-pill);
   font-family: var(--font-mono);
-  font-size: 15px;
+  font-size: 19px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-mute);
@@ -388,14 +388,14 @@ body {
 .masthead .brand {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text);
   letter-spacing: 0;
 }
 .masthead .issue {
   margin-left: auto;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: var(--track-caps);
   text-transform: uppercase;
   color: var(--text-mute);
@@ -424,19 +424,19 @@ body {
   align-items: baseline;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 18px;
+  font-size: 22px;
   color: var(--text-faint);
   letter-spacing: 0.06em;
   pointer-events: none;
   user-select: none;
 }
 .page-num-badge .pn-cur {
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-mute);
 }
 .page-num-badge .pn-sep {
   opacity: 0.4;
 }
 .page-num-badge .pn-tot {
-  font-size: 16px;
+  font-size: 20px;
 }

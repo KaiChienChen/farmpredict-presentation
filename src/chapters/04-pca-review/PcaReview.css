@@ -1,4 +1,4 @@
-/* ── Chapter 04 · pca-review ── */
+﻿/* ── Chapter 04 · pca-review ── */
 
 .pca-scene {
   position: absolute;
@@ -35,7 +35,7 @@
 
 /* Matrix visualization */
 .pca-matrix-label {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--text-mute);
   margin-bottom: 10px;
 }
@@ -80,7 +80,7 @@
   gap: 2px;
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-mute);
   margin-left: 8px;
   align-self: center;
@@ -88,10 +88,10 @@
 
 .pca-dim-n { color: var(--text); }
 .pca-dim-p { color: var(--accent); }
-.pca-dim-sep { font-size: 16px; text-align: center; }
+.pca-dim-sep { font-size: 20px; text-align: center; }
 
 .pca-matrix-sub {
-  font-size: 15px;
+  font-size: 19px;
   color: var(--text-faint);
   line-height: 1.6;
 }
@@ -117,7 +117,7 @@
 
 .pca-prob-title {
   font-family: var(--font-display-cn);
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 8px;
@@ -125,14 +125,14 @@
 
 .pca-prob-desc {
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-2);
   line-height: 1.6;
 }
 
 .pca-prob-solution {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-mute);
   line-height: 1.6;
   padding: 16px 20px;
@@ -154,7 +154,7 @@
 }
 
 .pca-ipo-label {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--text-mute);
   margin-bottom: 16px;
 }
@@ -167,7 +167,7 @@
 .pca-word-node {
   position: absolute;
   font-family: var(--font-display-cn);
-  font-size: 30px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--text);
   padding: 10px 18px;
@@ -224,11 +224,11 @@
   background: var(--rule);
 }
 
-.pca-arrow-label { font-size: 14px; color: var(--text-mute); }
+.pca-arrow-label { font-size: 17px; color: var(--text-mute); }
 
 .pca-arrow-head {
   font-family: var(--font-display-en);
-  font-size: 28px;
+  font-size: 34px;
   color: var(--accent);
   transform: rotate(90deg);
 }
@@ -259,12 +259,12 @@
 
 .pca-factor-title {
   font-family: var(--font-display-cn);
-  font-size: 34px;
+  font-size: 40px;
   font-weight: 700;
   color: var(--accent);
 }
 
-.pca-factor-sub { font-size: 15px; color: var(--accent); margin-top: 4px; }
+.pca-factor-sub { font-size: 19px; color: var(--accent); margin-top: 4px; }
 
 .pca-factor-meaning {
   text-align: center;
@@ -273,21 +273,21 @@
 
 .pca-factor-meaning-title {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-mute);
   margin-bottom: 6px;
 }
 
 .pca-factor-meaning-text {
   font-family: var(--font-display-cn);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text);
   line-height: 1.5;
   margin-bottom: 10px;
 }
 
 .pca-factor-formula {
-  font-size: 15px;
+  font-size: 19px;
   color: var(--text-mute);
   background: var(--surface-3);
   padding: 8px 14px;
@@ -297,7 +297,7 @@
 .pca-intuition-footer {
   flex-shrink: 0;
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-mute);
   border-top: var(--rule-w) var(--rule-style) var(--rule);
   padding-top: 16px;
@@ -365,7 +365,7 @@
 }
 
 .pca-mbox-sub {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-mute);
   text-align: center;
 }
@@ -404,12 +404,12 @@
 
 .pca-legend-title {
   font-family: var(--font-display-cn);
-  font-size: 22px;
+  font-size: 27px;
   font-weight: 700;
   margin-bottom: 4px;
 }
 
-.pca-legend-desc { font-size: 16px; color: var(--text-mute); }
+.pca-legend-desc { font-size: 20px; color: var(--text-mute); }
 
 /* ── Step 3 · Decomposition ─────────────────────────────────────────── */
 .pca-scene--decomp { justify-content: flex-start; }
@@ -471,7 +471,7 @@
 }
 
 .pca-deq-sub {
-  font-size: 13px;
+  font-size: 16px;
   text-align: center;
   white-space: pre-line;
 }
@@ -505,7 +505,7 @@
 
 .pca-dc-head {
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 10px;
   padding-bottom: 10px;
@@ -518,14 +518,14 @@
 
 .pca-dc-body {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-2);
   line-height: 1.6;
   margin-bottom: 12px;
 }
 
 .pca-dc-example {
-  font-size: 15px;
+  font-size: 19px;
   color: var(--text-mute);
   padding: 8px 12px;
   background: var(--surface-3);
@@ -566,7 +566,7 @@
 }
 
 .pca-fig-caption {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
   text-align: center;
 }
@@ -596,14 +596,14 @@
 
 .pca-scree-note-title {
   font-family: var(--font-display-cn);
-  font-size: 22px;
+  font-size: 27px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 4px;
 }
 
 .pca-scree-note-sub {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-mute);
   line-height: 1.6;
 }
@@ -624,7 +624,7 @@
 }
 
 .pca-ksel-formula-label {
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 20px;
   color: var(--text-mute);
 }
@@ -632,7 +632,7 @@
 .pca-ksel-eq {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 30px;
+  font-size: 36px;
   color: var(--text);
   line-height: 1.8;
   display: flex;
@@ -641,9 +641,9 @@
   gap: 4px;
 }
 
-.pca-ksel-sym { color: var(--accent); font-size: 34px; }
+.pca-ksel-sym { color: var(--accent); font-size: 40px; }
 .pca-ksel-op { color: var(--text-mute); font-style: normal; }
-.pca-ksel-text { font-style: normal; font-family: var(--font-mono); font-size: 22px; }
+.pca-ksel-text { font-style: normal; font-family: var(--font-mono); font-size: 27px; }
 .pca-ksel-var { color: var(--text); }
 .pca-ksel-lambda { color: var(--accent); }
 .pca-ksel-thresh { color: #b45309; }
@@ -698,7 +698,7 @@
 }
 
 .pca-param-val { font-size: 64px; }
-.pca-param-label { font-size: 14px; text-align: center; line-height: 1.6; }
+.pca-param-label { font-size: 17px; text-align: center; line-height: 1.6; }
 
 .pca-param-arrow {
   font-family: var(--font-display-en);
@@ -709,7 +709,7 @@
 
 .pca-ksel-insight {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-mute);
   line-height: 1.7;
   padding: 16px 20px;
@@ -766,7 +766,7 @@
 .pca-sum-card:nth-child(2) { animation-delay: 200ms; }
 
 .pca-sum-head {
-  font-size: 15px;
+  font-size: 19px;
   padding-bottom: 12px;
   border-bottom: var(--rule-w) var(--rule-style) var(--rule);
 }
@@ -776,7 +776,7 @@
 
 .pca-sum-role {
   font-family: var(--font-display-cn);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 700;
   color: var(--text);
 }
@@ -788,12 +788,12 @@
 }
 
 .pca-sum-item {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--text-mute);
 }
 
 .pca-sum-verdict {
-  font-size: 15px;
+  font-size: 19px;
   padding: 8px 14px;
   border-radius: var(--r-xs);
   margin-top: 4px;
@@ -804,7 +804,7 @@
 
 .pca-summary-foot {
   font-family: var(--font-body);
-  font-size: 24px;
+  font-size: 30px;
   color: var(--text-mute);
   line-height: 1.6;
   border-top: var(--rule-w) var(--rule-style) var(--rule);

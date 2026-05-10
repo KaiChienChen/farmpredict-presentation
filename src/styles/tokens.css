@@ -48,8 +48,8 @@
   --hero-num-style:   italic;
   --hero-num-weight:  500;
   --hero-num-track:   -0.03em;
-  --stage-pad-x:   140px;              /* generous = refined */
-  --stage-pad-y:   100px;
+  --stage-pad-x:   100px;
+  --stage-pad-y:   72px;
   --card-shadow:
     0 1px 0 var(--rule),
     0 16px 40px rgba(20, 30, 40, 0.06);

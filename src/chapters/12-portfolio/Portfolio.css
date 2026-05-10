@@ -1,4 +1,4 @@
-/* ── Chapter 12 · portfolio ── */
+﻿/* ── Chapter 12 · portfolio ── */
 
 .pf-scene {
   position: absolute;
@@ -42,14 +42,14 @@
   transition: opacity 600ms ease, transform 600ms ease;
 }
 .pf-flow-node.is-lit { opacity: 1; transform: translateY(0); }
-.pf-flow-node-num { font-size: 11px; }
+.pf-flow-node-num { font-size: 14px; }
 .pf-flow-node-label {
   font-family: var(--font-display-cn);
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--accent);
 }
-.pf-flow-node-sub { font-size: 12px; line-height: 1.5; }
+.pf-flow-node-sub { font-size: 15px; line-height: 1.5; }
 
 /* ── Step 1 · Results ───────────────────────────────────────────────────── */
 .pf-results-layout {
@@ -71,7 +71,7 @@
 .pf-result-block.is-shown { opacity: 1; transform: translateY(0); }
 .pf-result-block--vw { opacity: 0.8; }
 .pf-result-block--vw.is-shown { opacity: 0.7; }
-.pf-rb-label { font-size: 13px; }
+.pf-rb-label { font-size: 16px; }
 .pf-rb-stats { display: flex; gap: 40px; align-items: baseline; }
 .pf-rb-num {
   font-size: 80px;
@@ -79,8 +79,8 @@
   color: var(--accent);
 }
 .pf-rb-num--muted { color: var(--text-mute); font-size: 64px; }
-.pf-rb-sub { font-size: 12px; margin-top: 4px; }
-.pf-rb-detail { font-size: 14px; }
+.pf-rb-sub { font-size: 15px; margin-top: 4px; }
+.pf-rb-detail { font-size: 17px; }
 .pf-rb-divider {
   width: 1px;
   background: var(--rule);
@@ -89,7 +89,7 @@
   flex-shrink: 0;
 }
 .pf-results-note {
-  font-size: 18px;
+  font-size: 22px;
   color: var(--text-mute);
   border-top: 1px solid var(--rule);
   padding-top: 20px;
@@ -114,7 +114,7 @@
   transition: opacity 600ms ease, transform 600ms ease;
 }
 .pf-market-main.is-shown { opacity: 1; transform: translateY(0); }
-.pf-market-label { font-size: 13px; margin-bottom: 4px; }
+.pf-market-label { font-size: 16px; margin-bottom: 4px; }
 .pf-r2-visual { padding: 20px 0; }
 .pf-r2-bar-wrap {
   height: 48px;
@@ -135,11 +135,11 @@
 .pf-r2-bar--market { background: var(--text-mute); }
 .pf-r2-bar-label {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 16px;
   color: var(--surface);
   padding: 0 12px;
 }
-.pf-r2-bar-label--sm { font-size: 10px; padding: 0 6px; }
+.pf-r2-bar-label--sm { font-size: 12px; padding: 0 6px; }
 .pf-market-stats {
   flex: 1;
   display: flex;
@@ -149,15 +149,15 @@
 .pf-market-stat {
   padding: 16px 20px;
 }
-.pf-ms-label { font-size: 12px; margin-bottom: 4px; }
+.pf-ms-label { font-size: 15px; margin-bottom: 4px; }
 .pf-ms-val {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 34px;
+  font-size: 40px;
   color: var(--text);
   line-height: 1.2;
 }
-.pf-ms-sub { font-size: 12px; margin-top: 2px; }
+.pf-ms-sub { font-size: 15px; margin-top: 2px; }
 
 /* ── Step 3 · Costs ─────────────────────────────────────────────────────── */
 .pf-costs-layout {
@@ -167,7 +167,7 @@
   margin-top: 16px;
 }
 .pf-cost-breakdown { flex: 1.5; display: flex; flex-direction: column; gap: 16px; }
-.pf-cb-title { font-size: 14px; margin-bottom: 8px; }
+.pf-cb-title { font-size: 17px; margin-bottom: 8px; }
 .pf-cost-row {
   display: grid;
   grid-template-columns: 100px 1fr 80px 1fr;
@@ -177,7 +177,7 @@
 }
 .pf-cost-label {
   font-family: var(--font-display-cn);
-  font-size: 22px;
+  font-size: 27px;
   font-weight: 600;
   color: var(--text);
 }
@@ -196,11 +196,11 @@
 .pf-cost-bps {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 24px;
+  font-size: 30px;
   color: var(--text);
   text-align: right;
 }
-.pf-cost-note { font-size: 13px; }
+.pf-cost-note { font-size: 16px; }
 .pf-cost-total {
   display: flex;
   align-items: baseline;
@@ -211,7 +211,7 @@
 }
 .pf-cost-total-label {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 17px;
 }
 .pf-cost-total-val {
   font-size: 56px;
@@ -224,7 +224,7 @@
   flex-direction: column;
   gap: 16px;
 }
-.pf-ac-label { font-size: 13px; }
+.pf-ac-label { font-size: 16px; }
 .pf-ac-stats { display: flex; gap: 32px; align-items: baseline; }
 .pf-ac-num {
   font-size: 64px;
@@ -257,19 +257,19 @@
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.pf-ct-dim { font-size: 13px; display: flex; align-items: center; }
+.pf-ct-dim { font-size: 16px; display: flex; align-items: center; }
 .pf-ct-col {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-mute);
   padding: 0 16px;
   display: flex;
   align-items: center;
 }
 .pf-ct-apr, .pf-ct-sr { color: var(--text); font-weight: 600; }
-.pf-ct-note { font-size: 16px; }
+.pf-ct-note { font-size: 20px; }
 .pf-circuit-note {
-  font-size: 19px;
+  font-size: 24px;
   color: var(--text-mute);
   border-top: 1px solid var(--rule);
   padding-top: 16px;
@@ -302,7 +302,7 @@
 .pf-db-row--hl { background: var(--accent-soft); border-radius: 3px; }
 .pf-db-label {
   font-family: var(--font-display-cn);
-  font-size: 22px;
+  font-size: 27px;
   font-weight: 600;
   color: var(--text);
 }
@@ -322,12 +322,12 @@
 .pf-db-val {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 28px;
+  font-size: 34px;
   color: var(--text);
 }
-.pf-db-desc { font-size: 14px; }
+.pf-db-desc { font-size: 17px; }
 .pf-decompose-note {
-  font-size: 19px;
+  font-size: 24px;
   color: var(--text-mute);
   border-top: 1px solid var(--rule);
   padding-top: 16px;

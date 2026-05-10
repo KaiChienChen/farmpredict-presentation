@@ -1,4 +1,4 @@
-/* ── Chapter 06 · method-step1 ── */
+﻿/* ── Chapter 06 · method-step1 ── */
 
 .ms1-scene {
   position: absolute;
@@ -42,14 +42,14 @@
 }
 
 .ms1-article-head {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-faint);
   margin-bottom: 12px;
 }
 
 .ms1-article-text {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   line-height: 1.7;
   color: var(--text-mute);
 }
@@ -61,7 +61,7 @@
 
 .ms1-data-arrow {
   font-family: var(--font-mono);
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-faint);
   padding: 4px 0;
   text-align: center;
@@ -82,7 +82,7 @@
 }
 
 .ms1-vec-head {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
   margin-bottom: 12px;
 }
@@ -113,7 +113,7 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-mono);
-  font-size: 22px;
+  font-size: 27px;
   font-weight: 700;
   border: 2px solid var(--rule);
   border-radius: 6px;
@@ -128,12 +128,12 @@
 }
 
 .ms1-vec-word {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-faint);
 }
 
 .ms1-vec-ellipsis .ms1-vec-val {
-  font-size: 18px;
+  font-size: 22px;
   border-style: dashed;
 }
 
@@ -143,7 +143,7 @@
 }
 
 .ms1-why-head {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-mute);
   margin-bottom: 18px;
 }
@@ -162,12 +162,12 @@
 }
 
 .ms1-why-label {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-mute);
 }
 
 .ms1-why-desc {
-  font-size: 17px;
+  font-size: 21px;
   line-height: 1.6;
   color: var(--text-mute);
 }
@@ -177,7 +177,7 @@
 }
 
 .ms1-why-verdict {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
   margin-top: 4px;
 }
@@ -185,7 +185,7 @@
 .ms1-why-sep {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-faint);
   flex-shrink: 0;
 }
@@ -196,7 +196,7 @@
 }
 
 .ms1-dim-head {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-faint);
   margin-bottom: 16px;
 }
@@ -216,26 +216,26 @@
 }
 
 .ms1-dim-op {
-  font-size: 30px;
+  font-size: 36px;
   color: var(--text-faint);
 }
 
 .ms1-dim-n {
   font-family: var(--font-mono);
-  font-size: 30px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--text);
 }
 
 .ms1-dim-p {
   font-family: var(--font-mono);
-  font-size: 30px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--accent);
 }
 
 .ms1-dim-sub {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
   margin-top: 10px;
 }
@@ -290,7 +290,7 @@
 }
 
 .ms1-eq-sub {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-faint);
   text-align: center;
 }
@@ -331,12 +331,12 @@
 
 .ms1-mc-title {
   font-family: var(--font-display-cn);
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
 }
 
 .ms1-mc-desc {
-  font-size: 17px;
+  font-size: 21px;
   color: var(--text-mute);
   line-height: 1.6;
 }
@@ -367,7 +367,7 @@
 }
 
 .ms1-formula-num {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
 }
 
@@ -387,13 +387,13 @@
 
 .ms1-formula-rhs {
   font-family: var(--font-mono);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text);
   line-height: 1.4;
 }
 
 .ms1-formula-note {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
   max-width: 300px;
   text-align: right;
@@ -408,20 +408,20 @@
 }
 
 .ms1-pca-note-icon {
-  font-size: 28px;
+  font-size: 34px;
   flex-shrink: 0;
 }
 
 .ms1-pca-note-title {
   font-family: var(--font-display-cn);
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 8px;
 }
 
 .ms1-pca-note-desc {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--text-mute);
   line-height: 1.6;
 }
@@ -450,7 +450,7 @@
 
 .ms1-robust-title {
   font-family: var(--font-display-cn);
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--text);
 }
@@ -472,7 +472,7 @@
 }
 
 .ms1-k-head span {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-faint);
 }
 
@@ -509,12 +509,12 @@
 }
 
 .ms1-perf {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--text-mute);
 }
 
 .ms1-robust-note {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
 }
 
@@ -524,20 +524,20 @@
 
 .ms1-ri-title {
   font-family: var(--font-display-cn);
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 16px;
 }
 
 .ms1-ri-body {
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-mute);
   line-height: 1.7;
 }
 
 .ms1-ri-preview {
-  font-size: 15px;
+  font-size: 19px;
   color: var(--accent);
   margin-top: 20px;
   padding-top: 16px;
@@ -581,7 +581,7 @@
 }
 
 .ms1-fig-caption {
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-faint);
   text-align: center;
 }
@@ -617,13 +617,13 @@
 }
 
 .ms1-topic-num {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--accent);
 }
 
 .ms1-topic-label {
   font-family: var(--font-display-cn);
-  font-size: 15px;
+  font-size: 19px;
   font-weight: 700;
   color: var(--text);
   text-align: center;
@@ -631,7 +631,7 @@
 }
 
 .ms1-topics-note {
-  font-size: 20px;
+  font-size: 25px;
   line-height: 1.7;
   color: var(--text-mute);
   padding-top: 16px;

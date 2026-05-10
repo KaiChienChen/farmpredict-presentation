@@ -1,4 +1,4 @@
-/* ── Chapter 03 · chinese-market ── */
+﻿/* ── Chapter 03 · chinese-market ── */
 
 .cm-scene {
   position: absolute;
@@ -31,7 +31,7 @@
 }
 
 .cm-seg-lang {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--text-faint);
   letter-spacing: 0.2em;
 }
@@ -62,13 +62,13 @@
 
 .cm-seg-note {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-mute);
   text-align: center;
 }
 
 .cm-seg-badge {
-  font-size: 15px;
+  font-size: 19px;
   padding: 8px 18px;
   border-radius: var(--r-pill);
   border: var(--rule-w) solid var(--rule);
@@ -144,7 +144,7 @@
 
 .cm-cn-label-word {
   font-family: var(--font-display-cn);
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 700;
 }
 
@@ -152,7 +152,7 @@
 .cm-cn-label--b .cm-cn-label-word { color: var(--text-2); }
 
 .cm-cn-label-en {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-mute);
 }
 
@@ -176,7 +176,7 @@
 
 .cm-chart-title {
   font-family: var(--font-display-cn);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 700;
   color: var(--text);
 }
@@ -195,7 +195,7 @@
 
 .cm-mkt-label {
   font-family: var(--font-display-cn);
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--text);
 }
@@ -221,16 +221,16 @@
 
 .cm-mkt-pct {
   color: #fff;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .cm-mkt-note {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--text-mute);
 }
 
 .cm-chart-note {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
   margin-top: 8px;
 }
@@ -250,7 +250,7 @@
 
 .cm-insight-icon {
   font-family: var(--font-display-cn);
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--accent);
   padding: 8px 12px;
@@ -262,14 +262,14 @@
 
 .cm-insight-title {
   font-family: var(--font-display-cn);
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 8px;
 }
 
 .cm-insight-sub {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1.7;
   color: var(--text-mute);
 }
@@ -306,7 +306,7 @@
 }
 
 .cm-reg-card-head {
-  font-size: 16px;
+  font-size: 20px;
   color: var(--accent);
   padding-bottom: 14px;
   border-bottom: var(--rule-w) var(--rule-style) var(--rule);
@@ -326,7 +326,7 @@
 .cm-price-ceil {
   background: rgba(26,58,140,0.12);
   color: var(--accent);
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
   padding: 12px;
 }
@@ -364,7 +364,7 @@
 }
 
 .cm-price-mid {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-mute);
   padding: 8px 0;
   border-top: 1px dashed var(--rule);
@@ -376,21 +376,21 @@
 .cm-price-floor {
   background: var(--surface-3);
   color: var(--text-mute);
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
   padding: 12px;
 }
 
 .cm-reg-desc {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-2);
   line-height: 1.6;
 }
 
 .cm-reg-cite {
   display: block;
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
   margin-top: 6px;
 }
@@ -414,12 +414,12 @@
   padding: 12px 20px;
   border-radius: var(--r-xs);
   border-left: 3px solid var(--rule);
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .cm-short-arrow {
   font-family: var(--font-mono);
-  font-size: 16px;
+  font-size: 20px;
   color: var(--text-mute);
   text-align: right;
   padding-top: 4px;
@@ -462,7 +462,7 @@
 }
 
 .cm-fig-caption {
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-faint);
   text-align: center;
 }
@@ -490,7 +490,7 @@
 .cm-callout--neg .cm-callout-num { color: var(--text-2); }
 
 .cm-callout-unit {
-  font-size: 15px;
+  font-size: 19px;
   margin-bottom: 4px;
 }
 
@@ -498,20 +498,20 @@
 
 .cm-callout-desc {
   font-family: var(--font-display-cn);
-  font-size: 22px;
+  font-size: 27px;
   font-weight: 700;
   color: var(--text);
 }
 
 .cm-callout-note {
-  font-size: 15px;
+  font-size: 19px;
   color: var(--text-mute);
   line-height: 1.7;
   margin-top: 4px;
 }
 
 .cm-callout-summary {
-  font-size: 15px;
+  font-size: 19px;
   color: var(--text-mute);
   line-height: 1.8;
   padding: 14px 16px;

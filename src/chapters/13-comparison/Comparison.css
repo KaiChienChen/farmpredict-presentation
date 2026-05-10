@@ -1,4 +1,4 @@
-/* ── Chapter 13 · comparison ── */
+﻿/* ── Chapter 13 · comparison ── */
 
 .cp-scene {
   position: absolute;
@@ -34,7 +34,7 @@
 }
 .cp-model-card.is-lit { opacity: 1; transform: translateY(0); }
 .cp-model-card--farm { border: 1.5px solid var(--accent); }
-.cp-model-tag { font-size: 12px; }
+.cp-model-tag { font-size: 15px; }
 .cp-model-name {
   font-family: var(--font-display-en);
   font-size: 44px;
@@ -43,9 +43,9 @@
   line-height: 1;
 }
 .cp-model-card--farm .cp-model-name { color: var(--accent); }
-.cp-model-desc { font-size: 14px; line-height: 1.5; }
+.cp-model-desc { font-size: 17px; line-height: 1.5; }
 .cp-models-note {
-  font-size: 19px;
+  font-size: 24px;
   color: var(--text-mute);
   border-top: 1px solid var(--rule);
   padding-top: 16px;
@@ -61,7 +61,7 @@
   margin-top: 24px;
 }
 .cp-perf-chart { flex: 2; display: flex; flex-direction: column; gap: 20px; }
-.cp-chart-title { font-size: 13px; margin-bottom: 4px; }
+.cp-chart-title { font-size: 16px; margin-bottom: 4px; }
 .cp-bar-row {
   display: flex;
   align-items: center;
@@ -69,7 +69,7 @@
 }
 .cp-bar-label {
   font-family: var(--font-display-en);
-  font-size: 22px;
+  font-size: 27px;
   font-weight: 600;
   color: var(--text-mute);
   min-width: 120px;
@@ -95,7 +95,7 @@
   top: 50%;
   transform: translateY(-50%);
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 17px;
   color: var(--surface);
   transition: opacity 400ms ease;
 }
@@ -109,12 +109,12 @@
 .cp-r2-val {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 28px;
+  font-size: 34px;
   color: var(--text-mute);
   transition: opacity 400ms ease;
 }
 .cp-perf-note {
-  font-size: 19px;
+  font-size: 24px;
   color: var(--text-mute);
   border-top: 1px solid var(--rule);
   padding-top: 16px;
@@ -140,14 +140,14 @@
 .cp-pt-group { display: flex; align-items: center; gap: 20px; }
 .cp-pt-name {
   font-family: var(--font-display-en);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 600;
   color: var(--text-mute);
   min-width: 100px;
 }
 .cp-pt-bars { flex: 1; display: flex; flex-direction: column; gap: 8px; }
 .cp-pt-bar-row { display: flex; align-items: center; gap: 12px; }
-.cp-pt-bar-label { font-size: 12px; min-width: 80px; }
+.cp-pt-bar-label { font-size: 15px; min-width: 80px; }
 .cp-pt-bar-wrap {
   flex: 1;
   height: 20px;
@@ -164,14 +164,14 @@
 .cp-pt-bar--random { background: var(--text-faint); }
 .cp-pt-val {
   font-family: var(--font-mono);
-  font-size: 14px;
+  font-size: 17px;
   color: var(--text-mute);
   min-width: 60px;
   transition: opacity 400ms ease;
 }
 .cp-pretrain-insight {
   font-family: var(--font-body);
-  font-size: 21px;
+  font-size: 26px;
   color: var(--text-mute);
   border-left: 3px solid var(--accent);
   padding-left: 20px;
@@ -198,7 +198,7 @@
 .cp-mom-row { display: flex; align-items: center; gap: 20px; }
 .cp-mom-label {
   font-family: var(--font-display-cn);
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 600;
   color: var(--text-mute);
   min-width: 220px;
@@ -228,10 +228,10 @@
 .cp-mom-apr {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 28px;
+  font-size: 34px;
   color: var(--text-mute);
 }
-.cp-mom-sr { font-size: 12px; }
+.cp-mom-sr { font-size: 15px; }
 .cp-mom-ref {
   padding: 20px 24px;
   display: flex;
@@ -264,7 +264,7 @@
 .cp-mech-step { display: flex; align-items: center; flex: 1; }
 .cp-mech-arrow {
   font-family: var(--font-mono);
-  font-size: 32px;
+  font-size: 38px;
   color: var(--text-faint);
   padding: 0 12px;
   flex-shrink: 0;
@@ -285,9 +285,9 @@
   color: var(--accent);
   margin-bottom: 12px;
 }
-.cp-mech-node-desc { font-size: 15px; line-height: 1.5; }
+.cp-mech-node-desc { font-size: 19px; line-height: 1.5; }
 .cp-mech-note {
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-mute);
   border-left: 3px solid var(--rule);
   padding-left: 20px;

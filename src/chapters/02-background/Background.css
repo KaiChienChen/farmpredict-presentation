@@ -1,4 +1,4 @@
-/* ── Chapter 02 · background ── */
+﻿/* ── Chapter 02 · background ── */
 
 .bg-scene {
   position: absolute;
@@ -52,7 +52,7 @@
 
 .bg-intro-sub {
   font-family: var(--font-body);
-  font-size: 30px;
+  font-size: 36px;
   color: var(--text-mute);
   line-height: 1.7;
   margin: 0;
@@ -74,7 +74,7 @@
 
 .bg-text-card-label {
   font-family: var(--font-display-cn);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 700;
   color: var(--text);
 }
@@ -125,7 +125,7 @@
 
 .bg-target-label {
   font-family: var(--font-display-cn);
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   color: var(--accent);
 }
@@ -158,7 +158,7 @@
 }
 
 .bg-dict-col-head {
-  font-size: 11px;
+  font-size: 14px;
   padding-bottom: 12px;
   border-bottom: var(--rule-w) var(--rule-style) var(--rule);
   margin-bottom: 8px;
@@ -211,20 +211,20 @@
 }
 
 .bg-formula-text {
-  font-size: 28px;
+  font-size: 34px;
   color: var(--text);
 }
 
 .bg-formula-eq {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 34px;
+  font-size: 40px;
   color: var(--text-mute);
 }
 
 .bg-formula-pos {
   font-family: var(--font-mono);
-  font-size: 20px;
+  font-size: 25px;
   color: var(--accent);
   padding: 6px 14px;
   background: var(--accent-soft);
@@ -233,7 +233,7 @@
 
 .bg-formula-neg {
   font-family: var(--font-mono);
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-mute);
   padding: 6px 14px;
   background: var(--surface-3);
@@ -241,7 +241,7 @@
 }
 
 .bg-dict-verdict {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--text-mute);
   border-top: var(--rule-w) var(--rule-style) var(--rule);
   padding-top: 14px;
@@ -274,7 +274,7 @@
 
 .bg-flaw-title {
   font-family: var(--font-display-cn);
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 700;
   color: var(--text);
   padding-bottom: 12px;
@@ -289,14 +289,14 @@
 
 .bg-flaw-p {
   font-family: var(--font-body);
-  font-size: 26px;
+  font-size: 32px;
   color: var(--text-2);
   line-height: 1.6;
   margin: 0;
 }
 
 .bg-flaw-tag {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--text-mute);
   padding: 6px 10px;
   border: var(--rule-w) var(--rule-style) var(--rule);
@@ -323,33 +323,33 @@
 
 .bg-compare-phrase {
   font-family: var(--font-display-cn);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 700;
   color: var(--text);
 }
 
 .bg-compare-arrow {
   color: var(--text-faint);
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .bg-compare-score {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 600;
 }
 
 .bg-compare-score--pos { color: var(--accent); }
 
 .bg-compare-vs {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--text-faint);
   margin-left: 4px;
 }
 
 .bg-compare-same {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--text-mute);
   background: var(--surface-3);
   padding: 3px 8px;
@@ -384,7 +384,7 @@
 
 .bg-lda-snippet {
   font-family: var(--font-body);
-  font-size: 22px;
+  font-size: 27px;
   color: var(--text-2);
   line-height: 1.7;
   margin: 0;
@@ -392,7 +392,7 @@
 
 .bg-lda-arrow {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-mute);
   letter-spacing: 0.1em;
   text-align: center;
@@ -414,7 +414,7 @@
 
 .bg-topic-label {
   width: 100px;
-  font-size: 11px;
+  font-size: 14px;
   flex-shrink: 0;
 }
 
@@ -440,7 +440,7 @@
 .bg-topic-pct {
   width: 36px;
   text-align: right;
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .bg-lda-right {
@@ -465,7 +465,7 @@
   text-align: center;
   border-radius: var(--r-xs);
   font-family: var(--font-display-cn);
-  font-size: 26px;
+  font-size: 32px;
   font-weight: 700;
   line-height: 1.5;
 }
@@ -481,7 +481,7 @@
 }
 
 .bg-sestm-note {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--text-mute);
   line-height: 1.7;
   border-top: var(--rule-w) var(--rule-style) var(--rule);
@@ -490,7 +490,7 @@
 
 .bg-lda-verdict {
   font-family: var(--font-display-cn);
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 700;
   color: var(--text);
   line-height: 1.5;
@@ -500,7 +500,7 @@
 }
 
 .bg-verdict-sub {
-  font-size: 12px;
+  font-size: 15px;
   color: var(--text-mute);
   display: block;
   margin-top: 6px;
@@ -556,7 +556,7 @@
 
 .bg-assump-text {
   font-family: var(--font-display-cn);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 700;
   color: var(--text);
   line-height: 1.4;
@@ -564,7 +564,7 @@
 
 .bg-assump-footer {
   font-family: var(--font-body);
-  font-size: 26px;
+  font-size: 32px;
   color: var(--text-mute);
   line-height: 1.6;
   padding-top: 16px;
@@ -600,7 +600,7 @@
 
 .bg-reg-formula {
   font-family: var(--font-mono);
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-2);
   padding: 14px 16px;
   background: var(--surface-3);
@@ -627,21 +627,21 @@
 
 .bg-corr-word {
   font-family: var(--font-display-cn);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 700;
   color: var(--text);
   min-width: 64px;
 }
 
 .bg-corr-link {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--text-mute);
   flex: 1;
   text-align: center;
 }
 
 .bg-reg-verdict {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--text-mute);
   border-top: var(--rule-w) var(--rule-style) var(--rule);
   padding-top: 12px;
@@ -661,7 +661,7 @@
 }
 
 .bg-farm-title {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--accent);
   padding-bottom: 16px;
   border-bottom: var(--rule-w) var(--rule-style) var(--rule);
@@ -686,7 +686,7 @@
 .bg-farm-num {
   font-family: var(--font-display-en);
   font-style: italic;
-  font-size: 28px;
+  font-size: 34px;
   color: var(--accent);
   opacity: 0.6;
   line-height: 1;
@@ -696,14 +696,14 @@
 
 .bg-farm-step-title {
   font-family: var(--font-display-cn);
-  font-size: 28px;
+  font-size: 34px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 4px;
 }
 
 .bg-farm-step-sub {
-  font-size: 18px;
+  font-size: 22px;
   color: var(--text-mute);
 }
 
@@ -711,7 +711,7 @@
   text-align: center;
   padding: 6px 0;
   font-family: var(--font-mono);
-  font-size: 20px;
+  font-size: 25px;
   color: var(--text-faint);
   margin-left: 44px;
 }
