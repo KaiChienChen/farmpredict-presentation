@@ -1,0 +1,315 @@
+/* ── Chapter 10 · sentiment-words ── */
+
+.sw-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+.sw-header { flex-shrink: 0; }
+
+/* ── Step 0 · Word list ─────────────────────────────────────────────────── */
+.sw-wl-title {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+.sw-wl-layout {
+  flex: 1;
+  display: flex;
+  gap: 0;
+}
+.sw-wl-col { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.sw-wl-divider {
+  width: 1px;
+  background: var(--rule);
+  margin: 0 40px;
+  flex-shrink: 0;
+}
+.sw-wl-col-head {
+  font-size: 13px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 4px;
+}
+.sw-wl-col-head--pos { color: var(--accent); }
+.sw-wl-col-head--neg { color: var(--text); }
+
+.sw-word-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 450ms ease, transform 450ms ease;
+}
+.sw-word-item.is-lit { opacity: 1; transform: translateX(0); }
+.sw-word-item--pos.is-lit { border-left: 3px solid var(--accent-soft); }
+.sw-word-item--neg.is-lit { border-left: 3px solid var(--rule); }
+.sw-word-item--highlight.is-lit {
+  border-left: 3px solid var(--text);
+  background: var(--surface-3);
+}
+.sw-word-rank { font-size: 12px; min-width: 24px; color: var(--text-faint); }
+.sw-word-text {
+  font-family: var(--font-display-cn);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text);
+  flex: 1;
+}
+.sw-word-tag {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+.sw-word-tag--star { color: var(--text); }
+.sw-wl-note {
+  font-size: 19px;
+  color: var(--text-mute);
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+  margin-top: 12px;
+  flex-shrink: 0;
+  line-height: 1.6;
+}
+
+/* ── Step 1 · 敢死隊 ────────────────────────────────────────────────────── */
+.sw-scene--daredevil {}
+.sw-dd-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+}
+.sw-dd-word {
+  font-family: var(--font-display-cn);
+  font-size: 100px;
+  font-weight: 900;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.sw-dd-cols {
+  display: flex;
+  gap: 24px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.sw-dd-cols.is-shown { opacity: 1; transform: translateY(0); }
+.sw-dd-card {
+  flex: 1;
+  padding: 20px 24px;
+}
+.sw-dd-card-label { font-size: 12px; margin-bottom: 10px; }
+.sw-dd-card-body {
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: var(--text-mute);
+  line-height: 1.5;
+}
+.sw-dd-verdict {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+  transition-delay: 100ms;
+}
+.sw-dd-verdict.is-shown { opacity: 1; transform: translateY(0); }
+.sw-dd-dict {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px;
+  flex: 1;
+}
+.sw-dd-dict--found { border: 1.5px solid var(--accent); }
+.sw-dd-dict-result {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 700;
+}
+.sw-dd-dict-result--no { color: var(--text-mute); }
+.sw-dd-dict-result--yes { color: var(--accent); }
+.sw-dd-arrow {
+  font-family: var(--font-mono);
+  font-size: 32px;
+  color: var(--text-faint);
+  flex-shrink: 0;
+}
+.sw-dd-insight {
+  font-family: var(--font-body);
+  font-size: 24px;
+  color: var(--text-mute);
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+/* ── Step 2 · Compare ───────────────────────────────────────────────────── */
+.sw-cmp-title {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+.sw-cmp-layout {
+  flex: 1;
+  display: flex;
+  gap: 48px;
+}
+.sw-cmp-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sw-cmp-head { font-size: 13px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+.sw-cmp-tag { font-size: 12px; color: var(--text-faint); margin-bottom: 8px; }
+.sw-cmp-word {
+  font-family: var(--font-display-cn);
+  font-size: 38px;
+  font-weight: 700;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--surface-3);
+  transition: opacity 400ms ease;
+}
+.sw-cmp-word--farm { color: var(--accent); }
+.sw-cmp-word--sestm { color: var(--text-mute); }
+.sw-cmp-note {
+  font-size: 19px;
+  color: var(--text-mute);
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+  margin-top: 8px;
+  flex-shrink: 0;
+  line-height: 1.6;
+}
+
+/* ── Step 3 · Market ────────────────────────────────────────────────────── */
+.sw-mkt-title {
+  font-family: var(--font-display-cn);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+.sw-mkt-compare {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.sw-mkt-card {
+  flex: 1;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.sw-mkt-card.is-shown { opacity: 1; transform: translateY(0); }
+.sw-mkt-card--us { border: 1.5px solid var(--rule); }
+.sw-mkt-flag { font-size: 12px; }
+.sw-mkt-type {
+  font-family: var(--font-display-cn);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--accent);
+}
+.sw-mkt-examples {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  color: var(--text-mute);
+}
+.sw-mkt-reason {
+  font-family: var(--font-body);
+  font-size: 19px;
+  color: var(--text-mute);
+  line-height: 1.6;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+.sw-mkt-vs {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 36px;
+  color: var(--text-faint);
+  flex-shrink: 0;
+}
+.sw-mkt-note {
+  font-size: 19px;
+  color: var(--text-mute);
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+  margin-top: 12px;
+  flex-shrink: 0;
+  line-height: 1.6;
+}
+
+/* ── Step 4 · Panel ─────────────────────────────────────────────────────── */
+.sw-panel-layout {
+  flex: 1;
+  display: flex;
+  gap: 32px;
+  margin-top: 20px;
+  align-items: flex-start;
+}
+.sw-panel-left, .sw-panel-right { flex: 1; }
+.sw-panel-target {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.sw-panel-target--mkt { opacity: 0.7; }
+.sw-panel-target-label { font-size: 13px; margin-bottom: 8px; }
+.sw-panel-coef { display: flex; align-items: baseline; gap: 8px; }
+.sw-panel-num {
+  font-size: 80px;
+  line-height: 1;
+  color: var(--accent);
+}
+.sw-panel-num-na {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 80px;
+  color: var(--text-faint);
+}
+.sw-panel-stars {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  color: var(--text);
+}
+.sw-panel-sub { font-size: 13px; }
+.sw-panel-r2 {
+  font-family: var(--font-body);
+  font-size: 20px;
+  color: var(--text-mute);
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+  line-height: 1.6;
+}
+.sw-panel-r2 strong { color: var(--text); }
+.sw-panel-insight {
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: var(--text-mute);
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  line-height: 1.6;
+  flex-shrink: 0;
+  margin-top: 24px;
+}
+.sw-panel-insight strong { color: var(--text); }

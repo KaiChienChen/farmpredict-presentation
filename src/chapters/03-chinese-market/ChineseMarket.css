@@ -1,0 +1,521 @@
+/* ── Chapter 03 · chinese-market ── */
+
+.cm-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+
+.cm-header { flex-shrink: 0; }
+
+/* ── Step 0 · Segmentation ──────────────────────────────────────────── */
+.cm-scene--seg { justify-content: flex-start; }
+
+.cm-seg-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 40px 1fr;
+  align-items: center;
+  margin-top: 32px;
+  gap: 0;
+}
+
+.cm-seg-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 0 40px;
+}
+
+.cm-seg-lang {
+  font-size: 16px;
+  color: var(--text-faint);
+  letter-spacing: 0.2em;
+}
+
+.cm-en-tokens {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cm-en-token {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 52px;
+  color: var(--text);
+  padding: 8px 20px;
+  border: var(--rule-w) var(--rule-style) var(--rule);
+  border-radius: var(--r-xs);
+  animation: cm-pop 400ms var(--ease-overshoot) both;
+}
+
+@keyframes cm-pop {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.cm-seg-note {
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: var(--text-mute);
+  text-align: center;
+}
+
+.cm-seg-badge {
+  font-size: 15px;
+  padding: 8px 18px;
+  border-radius: var(--r-pill);
+  border: var(--rule-w) solid var(--rule);
+}
+
+.cm-badge-ok {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.cm-seg-badge--jieba {
+  color: var(--text-mute);
+}
+
+.cm-seg-divider {
+  width: 1px;
+  height: 100%;
+  background: var(--rule);
+  align-self: stretch;
+}
+
+/* Chinese word display */
+.cm-cn-word-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-height: 120px;
+}
+
+.cm-cn-raw {
+  display: flex;
+  gap: 0;
+}
+
+.cm-cn-char {
+  font-family: var(--font-display-cn);
+  font-size: 88px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  transition: color 400ms var(--ease-quart), background 400ms var(--ease-quart);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.cm-cn-char--a.is-segmented { color: var(--accent); background: var(--accent-soft); }
+.cm-cn-char--b.is-segmented { color: var(--text-2); background: var(--surface-3); }
+
+.cm-cn-labels {
+  display: flex;
+  gap: 12px;
+  animation: cm-fade-in 400ms var(--ease-quart) both;
+}
+
+@keyframes cm-fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cm-cn-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 20px;
+  border-radius: var(--r-xs);
+}
+
+.cm-cn-label--a { background: var(--accent-soft); }
+.cm-cn-label--b { background: var(--surface-3); }
+
+.cm-cn-label-word {
+  font-family: var(--font-display-cn);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.cm-cn-label--a .cm-cn-label-word { color: var(--accent); }
+.cm-cn-label--b .cm-cn-label-word { color: var(--text-2); }
+
+.cm-cn-label-en {
+  font-size: 14px;
+  color: var(--text-mute);
+}
+
+/* ── Step 1 · Market structure ──────────────────────────────────────── */
+.cm-scene--market { justify-content: flex-start; }
+
+.cm-market-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+  margin-top: 32px;
+  align-items: start;
+}
+
+.cm-market-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cm-chart-title {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cm-mkt-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.cm-mkt-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cm-mkt-label {
+  font-family: var(--font-display-cn);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cm-mkt-track {
+  height: 52px;
+  background: var(--surface-3);
+  border-radius: var(--r-xs);
+  overflow: hidden;
+}
+
+.cm-mkt-bar {
+  height: 100%;
+  background: var(--text-2);
+  border-radius: var(--r-xs);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 14px;
+}
+
+.cm-mkt-bar--hl { background: var(--accent); }
+
+.cm-mkt-pct {
+  color: #fff;
+  font-size: 18px;
+}
+
+.cm-mkt-note {
+  font-size: 16px;
+  color: var(--text-mute);
+}
+
+.cm-chart-note {
+  font-size: 14px;
+  color: var(--text-faint);
+  margin-top: 8px;
+}
+
+.cm-market-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cm-insight {
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.cm-insight-icon {
+  font-family: var(--font-display-cn);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--accent);
+  padding: 8px 12px;
+  background: var(--accent-soft);
+  border-radius: var(--r-xs);
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+
+.cm-insight-title {
+  font-family: var(--font-display-cn);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.cm-insight-sub {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-mute);
+}
+
+/* ── Step 2 · Regulation ────────────────────────────────────────────── */
+.cm-scene--reg { justify-content: flex-start; }
+
+.cm-reg-body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  margin-top: 32px;
+  align-content: start;
+}
+
+.cm-reg-card {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: cm-fade-in 500ms var(--ease-quart) both;
+}
+
+.cm-reg-card--short {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 600ms var(--ease-quart), transform 600ms var(--ease-quart);
+}
+
+.cm-reg-card--short.is-shown {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.cm-reg-card-head {
+  font-size: 16px;
+  color: var(--accent);
+  padding-bottom: 14px;
+  border-bottom: var(--rule-w) var(--rule-style) var(--rule);
+}
+
+/* Price band visual */
+.cm-price-band {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  border: var(--rule-w) var(--rule-style) var(--rule);
+  border-radius: var(--r-xs);
+  overflow: hidden;
+}
+
+.cm-price-ceil {
+  background: rgba(26,58,140,0.12);
+  color: var(--accent);
+  font-size: 16px;
+  text-align: center;
+  padding: 12px;
+}
+
+.cm-price-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.cm-price-bar {
+  width: 100%;
+  height: 44px;
+}
+
+.cm-price-bar--up {
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 6px,
+    rgba(26,58,140,0.07) 6px,
+    rgba(26,58,140,0.07) 12px
+  );
+}
+
+.cm-price-bar--dn {
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 6px,
+    rgba(100,100,100,0.07) 6px,
+    rgba(100,100,100,0.07) 12px
+  );
+}
+
+.cm-price-mid {
+  font-size: 14px;
+  color: var(--text-mute);
+  padding: 8px 0;
+  border-top: 1px dashed var(--rule);
+  border-bottom: 1px dashed var(--rule);
+  width: 100%;
+  text-align: center;
+}
+
+.cm-price-floor {
+  background: var(--surface-3);
+  color: var(--text-mute);
+  font-size: 16px;
+  text-align: center;
+  padding: 12px;
+}
+
+.cm-reg-desc {
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.cm-reg-cite {
+  display: block;
+  font-size: 14px;
+  color: var(--text-faint);
+  margin-top: 6px;
+}
+
+/* Short selling wall */
+.cm-short-wall {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cm-short-barrier {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cm-barrier-brick {
+  background: var(--surface-3);
+  color: var(--text-mute);
+  padding: 12px 20px;
+  border-radius: var(--r-xs);
+  border-left: 3px solid var(--rule);
+  font-size: 16px;
+}
+
+.cm-short-arrow {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text-mute);
+  text-align: right;
+  padding-top: 4px;
+}
+
+/* ── Step 3 · Asymmetry (paper figure) ──────────────────────────────── */
+.cm-scene--asym { justify-content: flex-start; }
+
+.cm-asym-body2 {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  margin-top: 24px;
+  align-items: start;
+}
+
+/* Figure frame */
+.cm-fig-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 700ms var(--ease-quart), transform 700ms var(--ease-quart);
+}
+
+.cm-fig-frame.is-shown {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cm-fig-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: var(--rule-w) var(--rule-style) var(--rule);
+  border-radius: var(--r-xs);
+  background: var(--surface-2);
+}
+
+.cm-fig-caption {
+  font-size: 14px;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+/* Callout annotations */
+.cm-callouts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 4px;
+}
+
+.cm-callout {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cm-callout-num {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.cm-callout--pos .cm-callout-num { color: var(--accent); }
+.cm-callout--neg .cm-callout-num { color: var(--text-2); }
+
+.cm-callout-unit {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.cm-callout--pos .cm-callout-unit { color: var(--accent); }
+
+.cm-callout-desc {
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cm-callout-note {
+  font-size: 15px;
+  color: var(--text-mute);
+  line-height: 1.7;
+  margin-top: 4px;
+}
+
+.cm-callout-summary {
+  font-size: 15px;
+  color: var(--text-mute);
+  line-height: 1.8;
+  padding: 14px 16px;
+  background: var(--surface-3);
+  border-radius: var(--r-xs);
+  border-left: 3px solid var(--rule);
+}

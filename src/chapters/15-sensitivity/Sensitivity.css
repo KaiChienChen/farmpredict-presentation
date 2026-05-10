@@ -1,0 +1,166 @@
+/* ── Chapter 15 · sensitivity ── */
+
+.sv-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+.sv-header { flex-shrink: 0; }
+.sv-title {
+  font-family: var(--font-display-cn);
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+.sv-note {
+  font-size: 19px;
+  color: var(--text-mute);
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  margin-top: 8px;
+  flex-shrink: 0;
+  line-height: 1.6;
+}
+
+/* ── Step 0 · Input format ───────────────────────────────────────────── */
+.sv-input-table {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  overflow: hidden;
+  max-height: 320px;
+}
+.sv-input-thead {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 14px 24px;
+  font-size: 13px;
+  color: var(--text-faint);
+  background: var(--surface-3);
+  border-bottom: 1px solid var(--rule);
+}
+.sv-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--rule);
+  align-items: center;
+  font-size: 16px;
+}
+.sv-input-row:last-child { border-bottom: none; }
+.sv-input-row--hl { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.sv-sr-val {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--text-mute);
+}
+.sv-sr-val--hl { color: var(--accent); }
+
+/* ── Step 1 · k-sensitivity ─────────────────────────────────────────── */
+.sv-k-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.sv-k-chart {
+  padding: 24px 20px;
+  flex-shrink: 0;
+}
+.sv-k-chart-title { font-size: 13px; margin-bottom: 12px; }
+.sv-k-insight {
+  font-size: 21px;
+  color: var(--text-mute);
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  line-height: 1.7;
+}
+.sv-k-insight strong { color: var(--text); }
+
+/* ── Step 2 · Portfolio size ─────────────────────────────────────────── */
+.sv-port-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.sv-port-card {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sv-port-card--hl { border: 1.5px solid var(--accent); }
+.sv-port-size-label { font-size: 13px; color: var(--text-faint); }
+.sv-port-apr {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--text-mute);
+  line-height: 1;
+}
+.sv-port-card--hl .sv-port-apr { color: var(--accent); }
+.sv-port-sr-label { font-size: 12px; color: var(--text-faint); }
+.sv-port-apr-track {
+  height: 6px;
+  background: var(--surface-3);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+.sv-port-apr-fill {
+  height: 100%;
+  background: var(--text-faint);
+  border-radius: 2px;
+  transition: width 900ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.sv-port-apr-fill--hl { background: var(--accent); }
+.sv-port-desc { font-size: 13px; color: var(--text-mute); }
+
+/* ── Step 3 · Robustness ─────────────────────────────────────────────── */
+.sv-robust-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.sv-robust-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  opacity: 0.15;
+  transform: translateX(-8px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.sv-robust-item.is-lit { opacity: 1; transform: translateX(0); }
+.sv-robust-check {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 32px;
+}
+.sv-robust-text {
+  font-family: var(--font-display-cn);
+  font-size: 26px;
+  color: var(--text);
+}
+.sv-robust-conclusion {
+  font-size: 21px;
+  color: var(--text-mute);
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  line-height: 1.7;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+.sv-robust-conclusion strong { color: var(--text); }

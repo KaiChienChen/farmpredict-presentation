@@ -1,0 +1,231 @@
+/* ── Chapter 14 · residual-vs-factor ── */
+
+.rv-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+.rv-header { flex-shrink: 0; }
+.rv-title {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 36px;
+}
+
+/* ── Step 0 · Design ─────────────────────────────────────────────────── */
+.rv-design-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
+.rv-config-card {
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0.2;
+  transform: translateY(12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.rv-config-card.is-lit { opacity: 1; transform: translateY(0); }
+.rv-config-card--accent { border: 1.5px solid var(--accent); }
+.rv-config-label {
+  font-family: var(--font-display-cn);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text);
+}
+.rv-config-card--accent .rv-config-label { color: var(--accent); }
+.rv-config-desc { font-size: 14px; color: var(--text-mute); }
+.rv-design-note {
+  font-size: 16px;
+  color: var(--text-mute);
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Step 1 · Results ────────────────────────────────────────────────── */
+.rv-results-layout {
+  flex: 1;
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+}
+.rv-results-chart { flex: 3; display: flex; flex-direction: column; gap: 24px; }
+.rv-results-r2 { flex: 1; display: flex; flex-direction: column; gap: 24px; padding-top: 28px; }
+.rv-chart-head { font-size: 13px; margin-bottom: 4px; flex-shrink: 0; }
+.rv-bar-group { display: flex; align-items: center; gap: 16px; }
+.rv-bar-label {
+  font-family: var(--font-display-cn);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-mute);
+  min-width: 120px;
+}
+.rv-bar-track {
+  flex: 1;
+  height: 44px;
+  background: var(--surface-3);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+.rv-bar-fill {
+  height: 100%;
+  background: var(--text-faint);
+  border-radius: 2px;
+  transition: width 900ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.rv-bar-fill--hl { background: var(--accent); }
+.rv-bar-val {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--surface);
+  transition: opacity 400ms ease;
+}
+.rv-r2-row {
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+.rv-r2-val {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 28px;
+  color: var(--text-mute);
+  transition: opacity 400ms ease;
+}
+.rv-r2-neg { color: var(--text-faint); }
+.rv-result-insight {
+  font-size: 20px;
+  color: var(--text-mute);
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  line-height: 1.6;
+  flex-shrink: 0;
+  margin-top: 16px;
+}
+
+/* ── Step 2 · Why factors ────────────────────────────────────────────── */
+.rv-why-title {
+  font-family: var(--font-display-cn);
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+.rv-why-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.rv-why-example {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 28px;
+}
+.rv-why-example-text { font-size: 17px; }
+.rv-why-arrow {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  color: var(--text-faint);
+  flex-shrink: 0;
+}
+.rv-why-example-conclusion { display: flex; align-items: center; gap: 12px; }
+.rv-why-x {
+  font-size: 28px;
+  color: var(--text-mute);
+}
+.rv-why-note { font-size: 16px; }
+.rv-why-split { display: flex; gap: 24px; flex: 1; }
+.rv-why-box {
+  flex: 1;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rv-why-box-head {
+  font-family: var(--font-display-cn);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-mute);
+}
+.rv-why-box--signal .rv-why-box-head { color: var(--accent); }
+.rv-why-box-body { font-size: 15px; line-height: 1.7; }
+.rv-why-box-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-faint);
+  margin-top: auto;
+}
+.rv-why-box--signal .rv-why-box-tag { color: var(--accent); }
+
+/* ── Step 3 · Methodology ────────────────────────────────────────────── */
+.rv-meth-title {
+  font-family: var(--font-display-cn);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+.rv-meth-paths {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.rv-meth-path {
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  opacity: 0.2;
+  transform: translateY(10px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.rv-meth-path.is-lit { opacity: 1; transform: translateY(0); }
+.rv-meth-path-tag { font-size: 14px; }
+.rv-meth-path--wrong .rv-meth-path-tag { color: var(--text-faint); }
+.rv-meth-path--right .rv-meth-path-tag { color: var(--accent); }
+.rv-meth-path-flow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.rv-meth-node {
+  font-family: var(--font-display-cn);
+  font-size: 20px;
+  font-weight: 600;
+  padding: 6px 14px;
+  background: var(--surface-3);
+  border-radius: 2px;
+}
+.rv-meth-node--control { color: var(--text-mute); }
+.rv-meth-node--predict { color: var(--accent); }
+.rv-meth-node--target { color: var(--text); }
+.rv-meth-path--wrong .rv-meth-node--target { color: var(--text-faint); }
+.rv-meth-arrow {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  color: var(--text-faint);
+}
+.rv-meth-path-note { font-size: 14px; color: var(--text-mute); }
+.rv-meth-footer {
+  font-size: 20px;
+  color: var(--text-mute);
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  flex-shrink: 0;
+  line-height: 1.6;
+}
+.rv-meth-footer strong { color: var(--text); }

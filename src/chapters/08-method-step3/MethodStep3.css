@@ -1,0 +1,367 @@
+/* ── Chapter 08 · method-step3 ── */
+
+.ms3-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+
+.ms3-header { flex-shrink: 0; }
+
+/* ── Step 0 · Model ─────────────────────────────────────────────────────── */
+.ms3-model-title {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 24px 0 36px;
+}
+
+.ms3-model-eq {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 56px;
+  line-height: 1.3;
+  color: var(--text-mute);
+  margin-bottom: 36px;
+}
+
+.ms3-eq-part {
+  opacity: 0.15;
+  transition: opacity 600ms ease;
+}
+.ms3-eq-part.is-lit { opacity: 1; color: var(--text); }
+.ms3-eq-part--b.is-lit { color: var(--text-mute); }
+.ms3-eq-part--c.is-lit { color: var(--accent); }
+.ms3-eq-op { color: var(--text-faint); font-size: 0.85em; }
+
+.ms3-model-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.ms3-legend-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+.ms3-legend-row.is-shown {
+  opacity: 1;
+  transform: translateX(0);
+}
+.ms3-legend-row--c .ms3-legend-sym { color: var(--accent); }
+
+.ms3-legend-sym {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 28px;
+  flex-shrink: 0;
+  min-width: 100px;
+}
+.ms3-legend-sym--b { color: var(--text-mute); }
+.ms3-legend-sym--c { color: var(--accent); }
+.ms3-legend-desc {
+  font-family: var(--font-body);
+  font-size: 20px;
+  color: var(--text-mute);
+}
+
+.ms3-model-note {
+  font-size: 20px;
+  color: var(--text-mute);
+  border-left: 3px solid var(--rule);
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
+/* ── Step 1 · LASSO ─────────────────────────────────────────────────────── */
+.ms3-scene--lasso {}
+
+.ms3-lasso-layout {
+  flex: 1;
+  display: flex;
+  gap: 48px;
+  margin-top: 24px;
+}
+
+.ms3-lasso-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ms3-lasso-eq {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 32px;
+  color: var(--text);
+  border: 1px solid var(--rule);
+  padding: 20px 24px;
+  line-height: 1.5;
+}
+
+.ms3-lasso-note { display: flex; flex-direction: column; gap: 12px; }
+.ms3-lasso-effect {
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: var(--text-mute);
+  padding: 16px 20px;
+  border-left: 3px solid var(--rule);
+  line-height: 1.5;
+}
+.ms3-lasso-effect--em {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+.ms3-lasso-effect strong { color: var(--text); font-weight: 900; }
+
+.ms3-lasso-right {
+  width: 420px;
+  flex-shrink: 0;
+}
+
+.ms3-coef-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ms3-coef-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 40px;
+  align-items: center;
+  gap: 12px;
+}
+
+.ms3-coef-word { font-size: 13px; }
+
+.ms3-coef-bar-wrap {
+  height: 18px;
+  background: var(--surface-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ms3-coef-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.ms3-coef-bar--pos { background: var(--accent); }
+.ms3-coef-bar--neg { background: var(--text-mute); }
+.ms3-coef-bar--zero { background: transparent; }
+.ms3-coef-zero { font-size: 13px; color: var(--text-faint); }
+
+/* ── Step 2 · Ridge ─────────────────────────────────────────────────────── */
+.ms3-scene--ridge {}
+
+.ms3-ridge-title {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+
+.ms3-compare-layout {
+  display: flex;
+  gap: 32px;
+  flex: 1;
+}
+
+.ms3-compare-panel {
+  flex: 1;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ms3-compare-panel--lasso { border: 1.5px solid var(--accent); }
+
+.ms3-compare-panel-head { font-size: 13px; }
+.ms3-compare-panel-sub {
+  font-family: var(--font-body);
+  font-size: 18px;
+  color: var(--text-mute);
+  line-height: 1.5;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ms3-bar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.ms3-bar-row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 12px;
+}
+.ms3-bar-word { font-size: 13px; }
+.ms3-bar-track {
+  height: 16px;
+  background: var(--surface-3);
+  border-radius: 2px;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+}
+.ms3-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 800ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+.ms3-bar-fill--ridge { background: var(--text-faint); }
+.ms3-bar-fill--lasso { background: var(--accent); }
+.ms3-bar-zero { font-family: var(--font-mono); font-size: 13px; color: var(--text-faint); padding-left: 8px; }
+
+.ms3-ridge-insight {
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: var(--text-mute);
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  margin-top: 20px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+/* ── Step 3 · Score ─────────────────────────────────────────────────────── */
+.ms3-scene--score {}
+
+.ms3-score-title {
+  font-family: var(--font-display-cn);
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 36px;
+}
+
+.ms3-score-pipeline {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  flex: 1;
+}
+
+.ms3-score-step { display: flex; flex-direction: column; }
+
+.ms3-score-arrow {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  color: var(--text-faint);
+  padding: 6px 0 6px 80px;
+}
+
+.ms3-score-node {
+  padding: 18px 28px;
+  display: flex;
+  gap: 24px;
+  align-items: baseline;
+  min-width: 600px;
+  opacity: 0.2;
+  transform: translateX(-12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.ms3-score-node.is-lit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ms3-score-node-main {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 30px;
+  color: var(--accent);
+  flex-shrink: 0;
+  min-width: 120px;
+}
+.ms3-score-node-desc { font-size: 18px; color: var(--text-mute); }
+
+.ms3-score-result {
+  font-family: var(--font-body);
+  font-size: 24px;
+  color: var(--text-mute);
+  border-top: 1px solid var(--rule);
+  padding-top: 24px;
+  margin-top: 24px;
+  line-height: 1.6;
+}
+.ms3-score-result strong { color: var(--accent); }
+
+/* ── Step 4 · Full Compare ──────────────────────────────────────────────── */
+.ms3-scene--full-compare {}
+
+.ms3-fc-title {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+
+.ms3-fc-table {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ms3-fc-head,
+.ms3-fc-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ms3-fc-head { padding: 10px 0; }
+
+.ms3-fc-row {
+  padding: 16px 0;
+  animation: ms3RowIn 450ms ease both;
+}
+
+@keyframes ms3RowIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ms3-fc-dim {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  color: var(--text-mute);
+}
+.ms3-fc-col {
+  font-family: var(--font-body);
+  font-size: 19px;
+  color: var(--text-mute);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+}
+.ms3-fc-col--farm {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.ms3-fc-note {
+  font-size: 19px;
+  color: var(--text-mute);
+  border-left: 3px solid var(--accent);
+  padding: 12px 20px;
+  line-height: 1.6;
+  margin-top: 24px;
+  flex-shrink: 0;
+}

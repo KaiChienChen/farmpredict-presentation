@@ -1,0 +1,262 @@
+/* ── Chapter 11 · event-study ── */
+
+.es-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+.es-header { flex-shrink: 0; }
+
+/* ── Step 0 · Design ────────────────────────────────────────────────────── */
+.es-design-title {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+.es-design-layout {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.es-timeline {}
+.es-tl-bar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 8px;
+}
+.es-tl-seg {
+  flex: 1;
+  height: 4px;
+}
+.es-tl-seg--pre { background: var(--rule); }
+.es-tl-seg--post { background: var(--rule); }
+.es-tl-event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.es-tl-event-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.es-tl-event-label { font-size: 12px; color: var(--accent); white-space: nowrap; }
+.es-tl-labels {
+  display: flex;
+  justify-content: space-between;
+}
+.es-tl-labels .label-mono { font-size: 12px; }
+.es-design-model {
+  padding: 28px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.es-design-model.is-shown { opacity: 1; transform: translateY(0); }
+.es-model-label { font-size: 12px; margin-bottom: 14px; }
+.es-model-eq {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 34px;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.es-model-legend { display: flex; flex-direction: column; gap: 6px; }
+.es-ml-row { font-size: 14px; color: var(--text-mute); }
+
+/* ── Steps 1-2 · Charts ─────────────────────────────────────────────────── */
+.es-chart-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.es-chart-title {
+  font-family: var(--font-body);
+  font-size: 20px;
+  color: var(--text-mute);
+  flex-shrink: 0;
+  margin: 16px 0 4px;
+}
+.es-svg {
+  width: 100%;
+  flex: 1;
+  max-height: 240px;
+}
+.es-grid-line {
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+.es-event-line {
+  stroke: var(--text-mute);
+  stroke-width: 1;
+  stroke-dasharray: 6,3;
+}
+.es-pre-line {
+  stroke: var(--accent);
+  stroke-width: 1;
+  opacity: 0.5;
+}
+.es-pre-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--accent);
+}
+.es-line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dashoffset 1400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.es-line--pos { stroke: var(--text); }
+.es-line--neg { stroke: var(--text-mute); }
+.es-line--true { stroke: var(--accent); stroke-width: 3; }
+.es-dot {
+  fill: var(--surface);
+  stroke-width: 2;
+}
+.es-dot--pos { stroke: var(--text); }
+.es-dot--neg { stroke: var(--text-mute); }
+.es-annotation {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--text);
+}
+.es-annotation--neg { fill: var(--text-mute); }
+.es-axis-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  fill: var(--text-faint);
+}
+.es-chart-note {
+  font-family: var(--font-body);
+  font-size: 20px;
+  color: var(--text-mute);
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+.es-chart-note strong { color: var(--text); }
+
+/* ── Step 3 · Asymmetry ─────────────────────────────────────────────────── */
+.es-asym-layout {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 20px;
+}
+.es-asym-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.es-asym-col.is-shown { opacity: 1; transform: translateY(0); }
+.es-asym-label { font-size: 13px; }
+.es-asym-num {
+  font-size: 120px;
+  line-height: 1;
+}
+.es-asym-num--pos { color: var(--accent); }
+.es-asym-num--neg { color: var(--text-mute); }
+.es-asym-unit {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--text-mute);
+}
+.es-asym-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+.es-asym-row {
+  font-family: var(--font-body);
+  font-size: 20px;
+  color: var(--text-mute);
+}
+.es-asym-divider {
+  width: 1px;
+  background: var(--rule);
+  align-self: stretch;
+  margin: 0 40px;
+  flex-shrink: 0;
+}
+.es-asym-insight {
+  font-size: 21px;
+  color: var(--text-mute);
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  line-height: 1.6;
+  flex-shrink: 0;
+  margin-top: 20px;
+}
+
+/* ── Step 4 · Literature ────────────────────────────────────────────────── */
+.es-lit-title {
+  font-family: var(--font-display-cn);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 20px 0 32px;
+}
+.es-lit-cards {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.es-lit-card {
+  padding: 28px;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.es-lit-card.is-lit { opacity: 1; transform: translateX(0); }
+.es-lit-ref { font-size: 14px; margin-bottom: 12px; color: var(--accent); }
+.es-lit-finding {
+  font-family: var(--font-body);
+  font-size: 22px;
+  color: var(--text-mute);
+  line-height: 1.6;
+}
+.es-lit-conclusion {
+  font-family: var(--font-display-cn);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  border-left: 3px solid var(--accent);
+  padding-left: 20px;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+/* ── Step 5 · Placebo ───────────────────────────────────────────────────── */
+.es-placebo-line {
+  fill: none;
+  stroke: var(--text-faint);
+  stroke-width: 0.8;
+}
+
+@keyframes esPlaceboFade {
+  from { opacity: 0; }
+  to { opacity: 0.7; }
+}
