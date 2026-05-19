@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MaskReveal } from "../../components/MaskReveal";
+import { TeX } from "../../components/TeX";
 import type { ChapterStepProps } from "../../registry/types";
 import "./SentimentWords.css";
 
@@ -222,18 +223,40 @@ function ScenePanelReg() {
         <div className="kicker">Chapter 10 · 面板回歸驗證</div>
         <hr className="rule" style={{ marginTop: 16 }} />
       </div>
+
+      <MaskReveal show duration={700}>
+        <div className="sw-panel-formula card">
+          <div className="label-mono sw-panel-formula-label">面板回歸模型（含控制變量）</div>
+          <div style={{ fontSize: "2em" }}>
+            <TeX display>
+              {`\\tilde{r}_{i,t} = \\alpha + \\gamma \\cdot S_{i,t-1} + \\boldsymbol{\\theta}^\\top \\mathbf{Z}_{i,t} + \\delta_i + \\mu_t + \\varepsilon_{i,t}`}
+            </TeX>
+          </div>
+          <div className="sw-panel-formula-legend">
+            <div className="label-mono"><TeX>{`\\tilde{r}_{i,t}`}</TeX> — 個股 <TeX>{`\\beta`}</TeX> 調整超額收益</div>
+            <div className="label-mono"><TeX>{`\\gamma`}</TeX> — 情感係數</div>
+            <div className="label-mono"><TeX>{`S_{i,t-1}`}</TeX> — 前一天情感分數（滯後一期）</div>
+            <div className="label-mono"><TeX>{`\\boldsymbol{\\theta}^\\top\\mathbf{Z}_{i,t}`}</TeX> — 控制變量：市值、賬面市值比、波動率、<TeX>{`\\beta`}</TeX>、滯後收益、盈餘意外</div>
+            <div className="label-mono"><TeX>{`\\delta_i`}</TeX> — 個股固定效應</div>
+            <div className="label-mono"><TeX>{`\\mu_t`}</TeX> — 時間固定效應（與事件研究符號一致）</div>
+          </div>
+        </div>
+      </MaskReveal>
+
       <div className="sw-panel-layout">
         <div className="sw-panel-left">
-          <MaskReveal show duration={600}>
+          <MaskReveal show delay={300} duration={600}>
             <div className="sw-panel-target card">
               <div className="label-mono sw-panel-target-label">預測目標：個股 beta 調整收益</div>
               <div className="sw-panel-coef">
                 <span className="hero-num sw-panel-num">0.193</span>
                 <span className="sw-panel-stars">***</span>
               </div>
-              <div className="label-mono sw-panel-sub">係數估計（最嚴格規格）</div>
+              <div className="label-mono sw-panel-sub">
+                <TeX>{`\\gamma`}</TeX> 係數估計（最嚴格規格）
+              </div>
               <div className="sw-panel-r2">
-                R² &nbsp; 0.007 → <strong>0.031</strong> &nbsp;（加入情感分數後）
+                <TeX>{`R^2`}</TeX>：0.007 → <strong>0.031</strong>（加入情感分數後）
               </div>
             </div>
           </MaskReveal>

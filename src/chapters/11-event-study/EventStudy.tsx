@@ -1,34 +1,8 @@
 import { useEffect, useState } from "react";
 import { MaskReveal } from "../../components/MaskReveal";
+import { TeX } from "../../components/TeX";
 import type { ChapterStepProps } from "../../registry/types";
 import "./EventStudy.css";
-
-/* ── SVG chart helper ─────────────────────────────────────────────────── */
-const DAYS = Array.from({ length: 28 }, (_, i) => i - 13); // -13 to +14
-
-// Positive news: rises from day -7, peaks at +83 on day +1
-const POS_BPS = [-2,-1,2,4,7,11,18,26,36,48,59,68,76,81,83,71,46,22,10,5,3,2,1,0,0,0,0,0];
-// Negative news: flat, then -26 on day +1
-const NEG_BPS = [0,1,0,-1,0,1,-1,0,0,0,1,0,-1,-2,-26,-19,-12,-6,-3,-1,0,0,1,0,0,0,0,0];
-
-const W = 700, H = 200;
-const X_PAD = 40, Y_PAD = 20;
-const CHART_W = W - X_PAD * 2;
-const CHART_H = H - Y_PAD * 2;
-
-function dayToX(p: number) {
-  return X_PAD + ((p + 13) / 27) * CHART_W;
-}
-function bpsToY(bps: number, range: [number, number]) {
-  const [lo, hi] = range;
-  return Y_PAD + CHART_H - ((bps - lo) / (hi - lo)) * CHART_H;
-}
-
-function makePath(bpsArr: number[], range: [number, number]) {
-  return bpsArr
-    .map((b, i) => `${i === 0 ? "M" : "L"} ${dayToX(DAYS[i]!).toFixed(1)} ${bpsToY(b, range).toFixed(1)}`)
-    .join(" ");
-}
 
 /* ── Step 0 · Event study design ─────────────────────────────────────── */
 function SceneDesign() {
@@ -64,15 +38,15 @@ function SceneDesign() {
           </div>
         </div>
         <div className={`es-design-model card${shown ? " is-shown" : ""}`}>
-          <div className="label-mono es-model-label">回歸模型</div>
-          <div className="es-model-eq">
-            Return<sub>it</sub> = Σ<sub>p</sub> β<sub>p</sub> Day<sub>ip</sub>
-            + δ<sub>i</sub> + μ<sub>t</sub> + ε<sub>it</sub>
-          </div>
+          <div className="label-mono es-model-label">事件研究回歸模型</div>
+          <TeX display>
+            {`r_{i,t}^{\\text{adj}} = \\sum_{p=-14}^{14} \\beta_p \\cdot D_{ip} + \\delta_i + \\mu_t + \\varepsilon_{it}`}
+          </TeX>
           <div className="es-model-legend">
-            <div className="label-mono es-ml-row">β<sub>p</sub> — 事件前後第 p 天的平均超額收益</div>
-            <div className="label-mono es-ml-row">δ<sub>i</sub> — 個股固定效應</div>
-            <div className="label-mono es-ml-row">μ<sub>t</sub> — 日期固定效應</div>
+            <div className="label-mono es-ml-row"><TeX>{`\\beta_p`}</TeX> — 事件前後第 <TeX>{`p`}</TeX> 天的平均 <TeX>{`\\beta`}</TeX> 調整超額收益</div>
+            <div className="label-mono es-ml-row"><TeX>{`D_{ip}`}</TeX> — 指示變量：股票 <TeX>{`i`}</TeX> 的事件是否發生在第 <TeX>{`t{-}p`}</TeX> 天</div>
+            <div className="label-mono es-ml-row"><TeX>{`\\delta_i`}</TeX> — 個股固定效應</div>
+            <div className="label-mono es-ml-row"><TeX>{`\\mu_t`}</TeX> — 時間固定效應</div>
           </div>
         </div>
       </div>
@@ -80,112 +54,101 @@ function SceneDesign() {
   );
 }
 
-/* ── Step 1 · Positive news SVG chart ────────────────────────────────── */
+/* ── Step 1 · Positive news – paper screenshot ────────────────────────── */
 function ScenePositive() {
-  const [drawn, setDrawn] = useState(false);
+  const [shown, setShown] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setDrawn(true), 300);
+    const t = setTimeout(() => setShown(true), 300);
     return () => clearTimeout(t);
   }, []);
-
-  const range: [number, number] = [-10, 95];
-  const path = makePath(POS_BPS, range);
-  const zeroY = bpsToY(0, range);
-  const eventX = dayToX(0);
-  const peakX = dayToX(1);
-  const preX = dayToX(-7);
 
   return (
     <div className="es-scene scene-pad es-scene--positive">
       <div className="es-header">
         <div className="kicker">Chapter 11 · 正面新聞：七天提前上漲</div>
+        <span className="badge-mono">Figure 5 (左面板) · Fan, Xue, Zhou (2021)</span>
         <hr className="rule" style={{ marginTop: 16 }} />
       </div>
-      <div className="es-chart-wrap">
-        <div className="es-chart-title">正面情感新聞 · 事件前後 beta 調整超額收益（bps）</div>
-        <svg className="es-svg" viewBox={`0 0 ${W} ${H}`}>
-          {/* Zero line */}
-          <line x1={X_PAD} y1={zeroY} x2={W - X_PAD} y2={zeroY} className="es-grid-line" />
-          {/* Event day marker */}
-          <line x1={eventX} y1={Y_PAD} x2={eventX} y2={H - Y_PAD} className="es-event-line" />
-          {/* Pre-announcement marker at day -7 */}
-          <line x1={preX} y1={Y_PAD} x2={preX} y2={H - Y_PAD} className="es-pre-line" strokeDasharray="4,3" />
-          {/* Chart path */}
-          <path
-            d={path}
-            className="es-line es-line--pos"
-            style={{ strokeDasharray: drawn ? "none" : "1500", strokeDashoffset: drawn ? 0 : 1500 }}
+      <div className="es-paper-layout">
+        <div className={`es-paper-frame${shown ? " is-shown" : ""}`}>
+          <img
+            src={`${import.meta.env.BASE_URL}figures/fig5-event-study.png`}
+            alt="Figure 5 left panel: positive news event study"
+            className="es-paper-img"
           />
-          {/* Peak annotation */}
-          {drawn && (
-            <g>
-              <circle cx={peakX} cy={bpsToY(83, range)} r={5} className="es-dot es-dot--pos" />
-              <text x={peakX + 8} y={bpsToY(83, range) - 4} className="es-annotation">+83 bps</text>
-            </g>
-          )}
-          {/* x-axis labels */}
-          {[-13,-7,0,7,14].map(d => (
-            <text key={d} x={dayToX(d)} y={H - 4} className="es-axis-label" textAnchor="middle">{d}</text>
-          ))}
-          {/* Legend */}
-          <text x={X_PAD} y={Y_PAD - 6} className="es-pre-label">p = −7 開始提前上漲</text>
-        </svg>
-        <MaskReveal show={drawn} delay={800} duration={600}>
-          <div className="es-chart-note">
-            事件後持續 2 天 · 然後消散 &nbsp;·&nbsp; 聰明錢在公告前 7 天提前佈局
-          </div>
-        </MaskReveal>
+        </div>
+        <div className="es-paper-notes">
+          <MaskReveal show={shown} delay={200} duration={600}>
+            <div className="es-paper-note-card card">
+              <div className="label-mono es-pn-label">左圖：正面新聞</div>
+              <div className="es-pn-key"><span className="es-pn-num">−7</span> 天前已顯著上漲</div>
+              <div className="label-mono es-pn-detail">消息提前洩露，聰明錢佈局</div>
+            </div>
+          </MaskReveal>
+          <MaskReveal show={shown} delay={500} duration={600}>
+            <div className="es-paper-note-card card es-pnc--accent">
+              <div className="label-mono es-pn-label">事件當天峰值</div>
+              <div className="es-pn-key"><span className="es-pn-num">+83</span> bps</div>
+              <div className="label-mono es-pn-detail">beta 調整超額收益</div>
+            </div>
+          </MaskReveal>
+          <MaskReveal show={shown} delay={800} duration={600}>
+            <div className="es-paper-note-card card">
+              <div className="label-mono es-pn-label">機制</div>
+              <div className="es-pn-desc">正面消息 → 直接買入無摩擦 → 可提前定價</div>
+            </div>
+          </MaskReveal>
+        </div>
       </div>
     </div>
   );
 }
 
-/* ── Step 2 · Negative news SVG chart ────────────────────────────────── */
+/* ── Step 2 · Negative news – paper screenshot ────────────────────────── */
 function SceneNegative() {
-  const [drawn, setDrawn] = useState(false);
+  const [shown, setShown] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setDrawn(true), 300);
+    const t = setTimeout(() => setShown(true), 300);
     return () => clearTimeout(t);
   }, []);
-
-  const range: [number, number] = [-35, 15];
-  const path = makePath(NEG_BPS, range);
-  const zeroY = bpsToY(0, range);
-  const eventX = dayToX(0);
-  const dropX = dayToX(1);
 
   return (
     <div className="es-scene scene-pad es-scene--negative">
       <div className="es-header">
         <div className="kicker">Chapter 11 · 負面新聞：事前零反應</div>
+        <span className="badge-mono">Figure 5 (右面板) · Fan, Xue, Zhou (2021)</span>
         <hr className="rule" style={{ marginTop: 16 }} />
       </div>
-      <div className="es-chart-wrap">
-        <div className="es-chart-title">負面情感新聞 · 事件前後 beta 調整超額收益（bps）</div>
-        <svg className="es-svg" viewBox={`0 0 ${W} ${H}`}>
-          <line x1={X_PAD} y1={zeroY} x2={W - X_PAD} y2={zeroY} className="es-grid-line" />
-          <line x1={eventX} y1={Y_PAD} x2={eventX} y2={H - Y_PAD} className="es-event-line" />
-          <path
-            d={path}
-            className="es-line es-line--neg"
-            style={{ strokeDasharray: drawn ? "none" : "1500", strokeDashoffset: drawn ? 0 : 1500 }}
+      <div className="es-paper-layout">
+        <div className={`es-paper-frame${shown ? " is-shown" : ""}`}>
+          <img
+            src={`${import.meta.env.BASE_URL}figures/fig5-event-study.png`}
+            alt="Figure 5 right panel: negative news event study"
+            className="es-paper-img"
           />
-          {drawn && (
-            <g>
-              <circle cx={dropX} cy={bpsToY(-26, range)} r={5} className="es-dot es-dot--neg" />
-              <text x={dropX + 8} y={bpsToY(-26, range) + 14} className="es-annotation es-annotation--neg">−26 bps</text>
-            </g>
-          )}
-          {[-13,-7,0,7,14].map(d => (
-            <text key={d} x={dayToX(d)} y={H - 4} className="es-axis-label" textAnchor="middle">{d}</text>
-          ))}
-          <text x={X_PAD} y={Y_PAD - 6} className="es-pre-label">事前：完全沒有提前反應</text>
-        </svg>
-        <MaskReveal show={drawn} delay={800} duration={600}>
-          <div className="es-chart-note">
-            事件後持續 3 天 · 比正面新聞更長——負面衝擊難以提前消化
-          </div>
-        </MaskReveal>
+        </div>
+        <div className="es-paper-notes">
+          <MaskReveal show={shown} delay={200} duration={600}>
+            <div className="es-paper-note-card card">
+              <div className="label-mono es-pn-label">右圖：負面新聞</div>
+              <div className="es-pn-key"><span className="es-pn-num--neg">0</span> 天前反應</div>
+              <div className="label-mono es-pn-detail">事件前曲線平坦，零提前反映</div>
+            </div>
+          </MaskReveal>
+          <MaskReveal show={shown} delay={500} duration={600}>
+            <div className="es-paper-note-card card es-pnc--neg">
+              <div className="label-mono es-pn-label">事件當天跌幅</div>
+              <div className="es-pn-key"><span className="es-pn-num--neg">−26</span> bps</div>
+              <div className="label-mono es-pn-detail">beta 調整超額收益</div>
+            </div>
+          </MaskReveal>
+          <MaskReveal show={shown} delay={800} duration={600}>
+            <div className="es-paper-note-card card">
+              <div className="label-mono es-pn-label">機制</div>
+              <div className="es-pn-desc">融券限制 → 即使提前知道壞消息也難以做空 → 無法提前定價</div>
+            </div>
+          </MaskReveal>
+        </div>
       </div>
     </div>
   );
@@ -282,56 +245,53 @@ function SceneLiterature() {
   );
 }
 
-/* ── Step 5 · Placebo test SVG ───────────────────────────────────────── */
+/* ── Step 5 · Placebo test ───────────────────────────────────────────── */
 function ScenePlacebo() {
-  const [drawn, setDrawn] = useState(false);
+  const [shown, setShown] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setDrawn(true), 300);
+    const t = setTimeout(() => setShown(true), 300);
     return () => clearTimeout(t);
   }, []);
-
-  const range: [number, number] = [-50, 95];
-  const truePosPath = makePath(POS_BPS, range);
-  const zeroY = bpsToY(0, range);
-
-  // Generate 30 fake placebo curves (simplified)
-  const seed = (n: number) => Math.sin(n * 127.1 + 13.5) * 0.5 + Math.sin(n * 311.7) * 0.3;
-  const placeboCurves = Array.from({ length: 30 }, (_, ci) =>
-    DAYS.map((_, di) => seed(ci * 100 + di) * 18)
-  );
 
   return (
     <div className="es-scene scene-pad es-scene--placebo">
       <div className="es-header">
-        <div className="kicker">Chapter 11 · 安慰劑測試</div>
+        <div className="kicker">Chapter 11 · 安慰劑實驗</div>
+        <span className="badge-mono">Figure 6 · Fan, Xue, Zhou (2021)</span>
         <hr className="rule" style={{ marginTop: 16 }} />
       </div>
-      <div className="es-chart-wrap">
-        <div className="es-chart-title">安慰劑（灰線）vs 真實事件研究結果（黑線）</div>
-        <svg className="es-svg" viewBox={`0 0 ${W} ${H}`}>
-          <line x1={X_PAD} y1={zeroY} x2={W - X_PAD} y2={zeroY} className="es-grid-line" />
-          {drawn && placeboCurves.map((c, i) => (
-            <path
-              key={i}
-              d={makePath(c, range)}
-              className="es-placebo-line"
-              style={{ opacity: 0, animation: `esPlaceboFade 400ms ease ${i * 30}ms forwards` }}
-            />
-          ))}
-          <path
-            d={truePosPath}
-            className="es-line es-line--true"
-            style={{ strokeDasharray: drawn ? "none" : "1500", strokeDashoffset: drawn ? 0 : 1500, transitionDelay: "800ms" }}
+      <div className="es-placebo-layout">
+        <div className={`es-paper-frame es-placebo-fig${shown ? " is-shown" : ""}`}>
+          <img
+            src={`${import.meta.env.BASE_URL}figures/fig6-placebo.png`}
+            alt="Figure 6: Placebo test — 200 random windows vs real event study curves"
+            className="es-paper-img"
           />
-          {[-13,-7,0,7,14].map(d => (
-            <text key={d} x={dayToX(d)} y={H - 4} className="es-axis-label" textAnchor="middle">{d}</text>
-          ))}
-        </svg>
-        <MaskReveal show={drawn} delay={1200} duration={600}>
-          <div className="es-chart-note">
-            200 次隨機重複在零附近 · 真實效應清楚站在安慰劑分佈之外 ——<strong> 不是統計噪音</strong>
+          <div className="label-mono" style={{ fontSize: 14, marginTop: 8, color: "var(--text-faint)" }}>
+            Figure 6 — 200 條安慰劑曲線（灰）vs 真實事件研究曲線（黑）
           </div>
-        </MaskReveal>
+        </div>
+        <div className="es-placebo-notes">
+          <MaskReveal show={shown} delay={200} duration={600}>
+            <div className="es-paper-note-card card">
+              <div className="label-mono es-pn-label">實驗設計</div>
+              <div className="es-pn-desc">對每支股票隨機選 28 天窗口作假事件日，重複 200 次，各自跑事件研究回歸</div>
+            </div>
+          </MaskReveal>
+          <MaskReveal show={shown} delay={500} duration={600}>
+            <div className="es-paper-note-card card es-pnc--accent">
+              <div className="label-mono es-pn-label">安慰劑結果</div>
+              <div className="es-pn-key" style={{ fontSize: 28 }}>200 條曲線貼近零線</div>
+              <div className="label-mono es-pn-detail">無任何系統性提前上漲模式</div>
+            </div>
+          </MaskReveal>
+          <MaskReveal show={shown} delay={800} duration={600}>
+            <div className="es-paper-note-card card">
+              <div className="label-mono es-pn-label">結論</div>
+              <div className="es-pn-desc">真實曲線清楚站在安慰劑分佈之外——效應是真實的，不是統計噪音</div>
+            </div>
+          </MaskReveal>
+        </div>
       </div>
     </div>
   );

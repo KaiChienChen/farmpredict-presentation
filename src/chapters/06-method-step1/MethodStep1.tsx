@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MaskReveal } from "../../components/MaskReveal";
+import { TeX } from "../../components/TeX";
 import type { ChapterStepProps } from "../../registry/types";
 import "./MethodStep1.css";
 
@@ -62,13 +63,13 @@ function SceneData() {
             <div className="ms1-why-row">
               <div className="ms1-why-item ms1-why-item--bad">
                 <div className="ms1-why-label label-mono">詞頻（TF）</div>
-                <div className="ms1-why-desc">量綱差異大<br />高頻詞主導估計<br />稀疏度不一致</div>
-                <div className="ms1-why-verdict label-mono">✗ 不穩定</div>
+                <div className="ms1-why-desc">「上市」出現 12 次 vs 「利潤」出現 3 次<br />PCA 方向被次數差異主導<br />語義結構被高頻詞蓋過</div>
+                <div className="ms1-why-verdict label-mono">✗ 量綱不一</div>
               </div>
               <div className="ms1-why-sep">vs</div>
               <div className="ms1-why-item ms1-why-item--good">
                 <div className="ms1-why-label label-mono" style={{ color: "var(--accent)" }}>二值化（0/1）</div>
-                <div className="ms1-why-desc">隱式正規化<br />量綱一致<br />模型更穩定</div>
+                <div className="ms1-why-desc">每個詞只記有 / 沒有<br />天然拉平量綱 = 隱式正規化<br />PCA 方向反映話題語義結構</div>
                 <div className="ms1-why-verdict label-mono" style={{ color: "var(--accent)" }}>✓ 採用</div>
               </div>
             </div>
@@ -158,25 +159,25 @@ function SceneFactorModel() {
 const FORMULAS = [
   {
     num: "①",
-    lhs: "F̂",
-    rhs: "= √n × [k largest eigenvectors of XX ᵀ]",
-    note: "對 n×n 矩陣做特徵分解（n < p 時更快）",
+    latex: `\\hat{F} = \\sqrt{n} \\times [k\\text{ largest eigenvectors of }XX^{\\top}]`,
+    note: "話題分數矩陣：每篇文章在 k 個話題上的強度分數",
+    detail: "XX^T 是 n×n 文章-文章協方差矩陣。前 k 個最大特徵向量代表方差最大的 k 個話題方向。√n 正規化讓因子方差不隨文章數 n 膨脹",
     color: "var(--accent)",
     delay: 200,
   },
   {
     num: "②",
-    lhs: "B̂",
-    rhs: "= X ᵀ F̂ / n",
-    note: "因子載荷 = 數據與因子的協方差",
+    latex: `\\hat{B} = X^{\\top}\\hat{F} / n`,
+    note: "因子載荷矩陣：每個詞對每個話題的貢獻強度",
+    detail: "把詞袋矩陣 X 投影到話題方向 F̂ 上，b̂_{jl} 衡量詞 j 與話題 l 的相關強度。載荷越大，詞越是該話題的核心詞；除以 n 與 ① 的 √n 對應",
     color: "var(--accent)",
     delay: 700,
   },
   {
     num: "③",
-    lhs: "Û",
-    rhs: "= X − F̂ B̂ ᵀ",
-    note: "殘差 = 原始矩陣 − 因子重構部分",
+    latex: `\\hat{U} = X - \\hat{F}\\hat{B}^{\\top}`,
+    note: "殘差矩陣：話題解釋不了的個股特異信號",
+    detail: "F̂B̂^T 是詞袋的話題重構部分；Û 是去掉公共話題後的剩餘——下一步 LASSO 篩情感詞的原材料",
     color: "#b45309",
     delay: 1200,
   },
@@ -195,10 +196,10 @@ function ScenePCA() {
           <div key={f.num} className="ms1-formula-row card" style={{ animationDelay: `${f.delay}ms` }}>
             <div className="ms1-formula-num label-mono" style={{ color: f.color }}>{f.num}</div>
             <div className="ms1-formula-eq">
-              <span className="ms1-formula-lhs" style={{ color: f.color }}>{f.lhs}</span>
-              <span className="ms1-formula-rhs">{f.rhs}</span>
+              <TeX>{f.latex}</TeX>
             </div>
             <div className="ms1-formula-note label-mono">{f.note}</div>
+            {f.detail && <div className="ms1-formula-detail label-mono">{f.detail}</div>}
           </div>
         ))}
 
@@ -208,8 +209,8 @@ function ScenePCA() {
             <div>
               <div className="ms1-pca-note-title">計算技巧</div>
               <div className="ms1-pca-note-desc label-mono">
-                XX ᵀ 是 n×n（≈ 914K²）——但只取前 k=9 個特徵向量，用 Lanczos 算法很快<br />
-                若直接對 X ᵀX（71K×71K）做分解反而更慢
+                只需前 k=9 個特徵向量，無需完整特徵分解<br />
+                對 914K 篇文章的稀疏矩陣仍可接受
               </div>
             </div>
           </div>

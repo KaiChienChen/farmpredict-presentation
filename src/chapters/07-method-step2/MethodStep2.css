@@ -293,63 +293,66 @@
 }
 .ms2-case-desc strong { color: var(--text); }
 
-/* ── Step 4 · Compare ──────────────────────────────────────────────────── */
+/* ── Step 4 · Compare (diff view) ─────────────────────────────────────── */
 .ms2-scene--compare {}
 
 .ms2-compare-title {
   font-family: var(--font-display-cn);
-  font-size: 48px;
+  font-size: 44px;
   font-weight: 700;
   color: var(--text);
-  margin: 24px 0 36px;
+  margin: 20px 0 28px;
 }
 
-.ms2-compare-table {
+.ms2-diff-layout {
   flex: 1;
   display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+.ms2-diff-box {
+  flex: 1;
+  padding: 24px;
+  display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 500ms ease, transform 500ms ease;
 }
-
-.ms2-compare-head,
-.ms2-compare-row {
-  display: grid;
-  grid-template-columns: 180px 1fr 1fr;
-  gap: 0;
-  border-bottom: 1px solid var(--rule);
+.ms2-diff-box.is-shown { opacity: 1; transform: translateY(0); }
+.ms2-diff-box--sestm { border-left: 3px solid var(--text-faint); }
+.ms2-diff-box--farm { border-left: 3px solid var(--accent); }
+.ms2-diff-label { font-size: 15px; }
+.ms2-diff-formula {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 30px;
+  color: var(--text);
 }
-
-.ms2-compare-head {
-  padding: 12px 0;
-}
-
-.ms2-compare-row {
-  padding: 16px 0;
-  animation: ms2RowSlide 500ms ease both;
-}
-
-@keyframes ms2RowSlide {
-  from { opacity: 0; transform: translateX(-12px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.ms2-compare-dim {
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  color: var(--text-mute);
-}
-
-.ms2-compare-col {
+.ms2-diff-verdict {
   font-family: var(--font-body);
-  font-size: 24px;
-  color: var(--text-mute);
-  padding: 0 16px;
+  font-size: 22px;
+  line-height: 1.6;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+.ms2-diff-verdict--bad { color: var(--text-mute); }
+.ms2-diff-verdict--good { color: var(--text); }
+.ms2-diff-arrow {
+  font-family: var(--font-display-en);
+  font-style: italic;
+  font-size: 36px;
+  color: var(--text-faint);
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
-.ms2-compare-col--farm {
-  color: var(--accent);
-  font-weight: 600;
+.ms2-diff-note {
+  font-size: 18px;
+  color: var(--text-faint);
+  border-top: 1px solid var(--rule);
+  padding-top: 14px;
+  flex-shrink: 0;
+  font-style: italic;
 }
-.ms2-compare-col--sestm {}

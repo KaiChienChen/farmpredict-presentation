@@ -46,31 +46,42 @@ function SceneCrawler() {
           </div>
         </div>
         <div className="dt-crawler-right">
-          <div className="label-mono dt-bfs-title">廣度優先搜尋（BFS）</div>
-          <svg className="dt-bfs-svg" viewBox="0 0 300 240">
+          <div className="label-mono dt-bfs-title">廣度優先搜尋（BFS）爬蟲邏輯</div>
+          <svg className="dt-bfs-svg" viewBox="0 0 460 340">
+            {/* Queue label */}
+            <text x="230" y="20" className="dt-bfs-text" style={{ fontSize: 13, fill: "var(--text-faint)" }}>Queue → 按層展開</text>
             {/* Root node */}
-            <circle cx="150" cy="30" r="22" className="dt-bfs-node dt-bfs-node--root" />
-            <text x="150" y="35" className="dt-bfs-text">首頁</text>
-            {/* Level 1 */}
-            {[70, 150, 230].map((cx, i) => (
+            <circle cx="230" cy="52" r="42" className="dt-bfs-node dt-bfs-node--root" />
+            <text x="230" y="59" className="dt-bfs-text" style={{ fontSize: 16 }}>首頁</text>
+            {/* Level 1 label */}
+            <text x="50" y="101" className="dt-bfs-text" style={{ fontSize: 12, fill: "var(--text-faint)" }}>第 1 層</text>
+            {/* Level 1 — 3 nodes */}
+            {[88, 230, 372].map((cx, i) => (
               <g key={i} style={{ opacity: nodes >= 2 ? 1 : 0, transition: `opacity 400ms ${i * 150}ms` }}>
-                <line x1="150" y1="52" x2={cx} y2="98" className="dt-bfs-line" />
-                <circle cx={cx} cy="115" r="20" className="dt-bfs-node" />
-                <text x={cx} y="120" className="dt-bfs-text" style={{ fontSize: 11 }}>
-                  {["頻道A", "財報", "公告"][i]}
+                <line x1="230" y1="94" x2={cx} y2="109" className="dt-bfs-line" />
+                <circle cx={cx} cy="145" r="36" className="dt-bfs-node" />
+                <text x={cx} y="152" className="dt-bfs-text" style={{ fontSize: 15 }}>
+                  {["財報", "公告", "新聞"][i]}
                 </text>
               </g>
             ))}
-            {/* Level 2 */}
-            {[35, 90, 150, 210, 265].map((cx, i) => (
+            {/* Level 2 label */}
+            <text x="50" y="199" className="dt-bfs-text" style={{ fontSize: 12, fill: "var(--text-faint)" }}>第 2 層</text>
+            {/* Level 2 — 2 children per L1 */}
+            {[46, 120, 193, 267, 340, 414].map((cx, i) => (
               <g key={i} style={{ opacity: nodes >= 5 ? 1 : 0, transition: `opacity 400ms ${i * 100}ms` }}>
-                <line x1={[70, 70, 150, 230, 230][i]!} y1="135" x2={cx} y2="178" className="dt-bfs-line" />
-                <circle cx={cx} cy="192" r="16" className="dt-bfs-node dt-bfs-node--leaf" />
-                <text x={cx} y="196" className="dt-bfs-text" style={{ fontSize: 10 }}>
-                  {i < 4 ? `新聞${i + 1}` : "…"}
+                <line x1={[88, 88, 230, 230, 372, 372][i]!} y1="181" x2={cx} y2="217" className="dt-bfs-line" />
+                <circle cx={cx} cy="245" r="28" className="dt-bfs-node dt-bfs-node--leaf" />
+                <text x={cx} y="251" className="dt-bfs-text" style={{ fontSize: 12 }}>
+                  {i < 5 ? `新聞${i + 1}` : "…"}
                 </text>
               </g>
             ))}
+            {/* Dotted connector from L2 to L3 */}
+            <line x1="230" y1="273" x2="230" y2="305" className="dt-bfs-line" style={{ strokeDasharray: "4,3", opacity: nodes >= 5 ? 0.4 : 0 }} />
+            {/* Level 3 label */}
+            <text x="50" y="322" className="dt-bfs-text" style={{ fontSize: 12, fill: "var(--text-faint)" }}>第 3 層</text>
+            <text x="230" y="322" className="dt-bfs-text" style={{ fontSize: 12, fill: "var(--text-faint)", opacity: nodes >= 5 ? 1 : 0 }}>… 個別新聞頁面</text>
           </svg>
         </div>
       </div>
@@ -151,13 +162,13 @@ function SceneBeta() {
       <div className="dt-beta-layout">
         <MaskReveal show duration={700}>
           <div className="dt-beta-eq">
-            <span className={`dt-eq-part${phase >= 1 ? " is-lit" : ""}`}>R̃<sub>it</sub></span>
+            <span className={`dt-eq-part${phase >= 1 ? " is-lit" : ""}`}>r̃<sub>it</sub></span>
             <span className="dt-eq-op"> = </span>
-            <span className={`dt-eq-part${phase >= 1 ? " is-lit" : ""}`}>R<sub>it</sub></span>
+            <span className={`dt-eq-part${phase >= 1 ? " is-lit" : ""}`}>r<sub>it</sub></span>
             <span className="dt-eq-op"> − </span>
             <span className={`dt-eq-part dt-eq-part--b${phase >= 2 ? " is-lit" : ""}`}>β<sub>i</sub></span>
             <span className="dt-eq-op dt-eq-op--b"> × </span>
-            <span className={`dt-eq-part dt-eq-part--b${phase >= 2 ? " is-lit" : ""}`}>R<sub>market,t</sub></span>
+            <span className={`dt-eq-part dt-eq-part--b${phase >= 2 ? " is-lit" : ""}`}>r<sub>market,t</sub></span>
           </div>
         </MaskReveal>
         <div className="dt-beta-cards">

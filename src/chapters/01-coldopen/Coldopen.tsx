@@ -21,16 +21,19 @@ function SceneQuestion() {
         <hr className="rule co-title-rule" />
         <h1 className="co-q-headline">
           <MaskReveal show delay={500} duration={1000}>
-            <span className="serif-cn co-q-line">機器能讀</span>
+            <span className="serif-cn co-q-line">機器能讀懂</span>
           </MaskReveal>
           <MaskReveal show delay={900} duration={1000}>
-            <span className="serif-cn co-q-line co-q-em">財經新聞</span>
+            <span className="serif-cn co-q-line co-q-em">中文財經文本</span>
           </MaskReveal>
           <MaskReveal show delay={1300} duration={1000}>
-            <span className="serif-cn co-q-line">炒股嗎？</span>
+            <span className="serif-cn co-q-line">嗎？</span>
           </MaskReveal>
         </h1>
-        <MaskReveal show delay={1900} duration={900}>
+        <MaskReveal show delay={1700} duration={800}>
+          <div className="co-q-model-badge label-mono">FarmPredict vs SESTM</div>
+        </MaskReveal>
+        <MaskReveal show delay={2100} duration={900}>
           <p className="co-q-sub">
             不靠字典，不靠人工標記——讓機器自己從文字裡學
           </p>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MaskReveal } from "../../components/MaskReveal";
+import { TeX } from "../../components/TeX";
 import type { ChapterStepProps } from "../../registry/types";
 import "./Portfolio.css";
 
@@ -73,7 +74,7 @@ function SceneResults() {
               <div className="label-mono pf-rb-sub">夏普比率 SR</div>
             </div>
           </div>
-          <div className="pf-rb-detail label-mono">多腿 80% · 空腿 18%</div>
+          <div className="pf-rb-detail label-mono">多頭部位 80% · 空頭部位 18%</div>
         </div>
         <div className="pf-rb-divider" />
         <div className={`pf-result-block pf-result-block--vw${shown ? " is-shown" : ""}`} style={{ transitionDelay: "200ms" }}>
@@ -112,9 +113,20 @@ function SceneMarketExp() {
         <div className="kicker">Chapter 12 · 市場風險暴露</div>
         <hr className="rule" style={{ marginTop: 16 }} />
       </div>
+      {shown && (
+        <div className="pf-market-formula card" style={{ marginBottom: 16 }}>
+          <div className="label-mono" style={{ marginBottom: 6 }}>市場暴露回歸模型</div>
+          <TeX display>
+            {`r_{\\text{L-S},t} = \\alpha + \\beta \\cdot r_{\\text{market},t} + \\varepsilon_t`}
+          </TeX>
+          <div className="label-mono" style={{ marginTop: 8, color: "var(--text-mute)", fontSize: 18 }}>
+            R² = 多空組合收益波動中，市場波動能解釋的比例
+          </div>
+        </div>
+      )}
       <div className="pf-market-layout">
         <div className={`pf-market-main${shown ? " is-shown" : ""}`}>
-          <div className="label-mono pf-market-label">多空組合 R² (市場)</div>
+          <div className="label-mono pf-market-label">多空組合 R²（市場）</div>
           <div className="pf-r2-visual">
             <div className="pf-r2-bar-wrap">
               <div
@@ -136,8 +148,8 @@ function SceneMarketExp() {
           {[
             { label: "Alpha 年化", val: "115%", sub: "幾乎等於原始收益" },
             { label: "日均收益", val: "31 bps", sub: "每個交易日" },
-            { label: "多腿 R²市場", val: "44.7%", sub: "個別暴露大" },
-            { label: "空腿 R²市場", val: "48.4%", sub: "合起來相互對沖" },
+            { label: "多頭部位 R²", val: "44.7%", sub: "個別市場暴露大" },
+            { label: "空頭部位 R²", val: "48.4%", sub: "合起來相互對沖" },
           ].map((s, i) => (
             <div
               key={s.label}
@@ -270,58 +282,55 @@ function SceneCircuit() {
       </div>
       <MaskReveal show={shown} delay={400} duration={600}>
         <div className="pf-circuit-note">
-          多頭腿受漲停板影響最大（漲停股恰好是情感最正面的）· 空頭腿相對穩定
+          多頭部位受漲停板影響最大（漲停股恰好是情感最正面的）· 空頭部位相對穩定
         </div>
       </MaskReveal>
     </div>
   );
 }
 
-/* ── Step 5 · Long/Short decomposition ───────────────────────────────── */
-function SceneDecompose() {
+/* ── Step 5 · Portfolio summary ──────────────────────────────────────────── */
+function SceneSummary() {
   const [shown, setShown] = useState(false);
   useEffect(() => {
-    const t = setTimeout(() => setShown(true), 400);
+    const t = setTimeout(() => setShown(true), 300);
     return () => clearTimeout(t);
   }, []);
 
-  const bars = [
-    { label: "多頭腿（Long）", pct: 80, note: "年化 80%", desc: "市場暴露 + 情感 alpha" },
-    { label: "空頭腿（Short）", pct: 18, note: "年化 18%", desc: "反向市場 + 情感 alpha" },
-    { label: "多空組合（L+S）", pct: 116, note: "年化 116%", desc: "市場風險相消，Alpha 留存", highlight: true },
+  const rows = [
+    { label: "等權組合（扣成本 + 漲跌停）", apr: "41.2%", sr: "4.74", note: "真實可執行條件下" },
+    { label: "市值加權組合", apr: "48%", sr: "3.34", note: "大盤股，效率較高" },
+    { label: "多空組合市場暴露（R²）", apr: "6.3%", sr: "—", note: "多頭空頭部位相消" },
   ];
 
   return (
     <div className="pf-scene scene-pad pf-scene--decompose">
       <div className="pf-header">
-        <div className="kicker">Chapter 12 · 多空腿分解</div>
+        <div className="kicker">Chapter 12 · 組合表現總結</div>
         <hr className="rule" style={{ marginTop: 16 }} />
       </div>
       <MaskReveal show duration={600}>
-        <h2 className="pf-decompose-title">為什麼多空對沖有效</h2>
+        <h2 className="pf-decompose-title">核心結論：純文字信號驅動的 Alpha</h2>
       </MaskReveal>
-      <div className="pf-decompose-bars">
-        {bars.map((b, i) => (
-          <div
-            key={b.label}
-            className={`pf-db-row${b.highlight ? " pf-db-row--hl" : ""}`}
-            style={{ opacity: shown ? 1 : 0, transform: shown ? "none" : "translateY(12px)", transition: `opacity 500ms ${i * 150}ms, transform 500ms ${i * 150}ms` }}
-          >
-            <div className="pf-db-label">{b.label}</div>
-            <div className="pf-db-bar-wrap">
-              <div
-                className={`pf-db-bar${b.highlight ? " pf-db-bar--hl" : ""}`}
-                style={{ width: shown ? `${(b.pct / 120) * 100}%` : "0%", transitionDelay: `${i * 150 + 200}ms` }}
-              />
-            </div>
-            <div className="pf-db-val">{b.note}</div>
-            <div className="label-mono pf-db-desc">{b.desc}</div>
+      <div className={`pf-summary-table${shown ? " is-shown" : ""}`}>
+        <div className="pf-sum-head">
+          <div className="pf-sum-col-dim label-mono" />
+          <div className="pf-sum-col label-mono">年化 APR</div>
+          <div className="pf-sum-col label-mono">夏普 SR</div>
+          <div className="pf-sum-col label-mono">說明</div>
+        </div>
+        {rows.map((r, i) => (
+          <div key={r.label} className="pf-sum-row" style={{ animationDelay: `${i * 120}ms` }}>
+            <div className="pf-sum-col-dim label-mono">{r.label}</div>
+            <div className="pf-sum-col pf-sum-apr">{r.apr}</div>
+            <div className="pf-sum-col pf-sum-sr">{r.sr}</div>
+            <div className="pf-sum-col pf-sum-note">{r.note}</div>
           </div>
         ))}
       </div>
-      <MaskReveal show={shown} delay={600} duration={600}>
+      <MaskReveal show={shown} delay={400} duration={600}>
         <div className="pf-decompose-note">
-          L+S 的 R²_market = 6.3% &nbsp;·&nbsp; 兩腿各有約 46% 市場暴露但方向相反，合起來幾乎為零
+          多頭部位與空頭部位各有約 46% 市場暴露、方向相反 → 合計後市場風險幾乎完全抵消 → 年化 Alpha ≈ 115%
         </div>
       </MaskReveal>
     </div>
@@ -335,5 +344,5 @@ export default function PortfolioChapter({ step }: ChapterStepProps) {
   if (step === 2) return <SceneMarketExp />;
   if (step === 3) return <SceneCosts />;
   if (step === 4) return <SceneCircuit />;
-  return <SceneDecompose />;
+  return <SceneSummary />;
 }

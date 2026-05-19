@@ -9,9 +9,11 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "extract-narrations": "tsx scripts/extract-narrations.ts",
-    "synthesize-audio": "bash scripts/synthesize-audio.sh"
+    "synthesize-audio": "bash scripts/synthesize-audio.sh",
+    "export-pdf": "tsx scripts/export-pdf.ts --serve"
   },
   "dependencies": {
+    "katex": "^0.16.47",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MaskReveal } from "../../components/MaskReveal";
+import { TeX } from "../../components/TeX";
 import type { ChapterStepProps } from "../../registry/types";
 import "./PcaReview.css";
 
@@ -367,28 +368,15 @@ function SceneKSelection() {
         <div className="pca-ksel-formula card">
           <div className="label-mono pca-ksel-formula-label">Adjusted Eigenvalue Thresholding</div>
           <div className="pca-ksel-eq">
-            <span className="pca-ksel-sym">k̂</span>
-            <span className="pca-ksel-op"> = </span>
-            <span className="pca-ksel-text">max</span>
-            <span className="pca-ksel-brace">&#123;</span>
-            <span className="pca-ksel-var">j</span>
-            <span className="pca-ksel-op"> &lt; </span>
-            <span className="pca-ksel-var">|D<sub>freq</sub>|</span>
-            <span className="pca-ksel-op"> : </span>
-            <span className="pca-ksel-lambda">λ̂<sub>j</sub><sup>C</sup></span>
-            <span className="pca-ksel-op"> &gt; </span>
-            <span className="pca-ksel-thresh">
-              1 + C<span className="pca-ksel-root">√(p / (n−1))</span>
-            </span>
-            <span className="pca-ksel-brace">&#125;</span>
+            <TeX display>{`\\hat{k} = \\max\\left\\{ j < |D_{\\text{freq}}| : \\hat{\\lambda}_j^C > 1 + C\\sqrt{\\frac{p}{n-1}} \\right\\}`}</TeX>
           </div>
           <div className="pca-ksel-legend">
             <div className="pca-ksel-leg-item">
-              <span className="pca-ksel-lambda" style={{ fontSize: 20 }}>λ̂<sub>j</sub><sup>C</sup></span>
+              <TeX>{`\\hat{\\lambda}_j^C`}</TeX>
               <span className="label-mono"> 偏差修正後的第 j 個特徵值</span>
             </div>
             <div className="pca-ksel-leg-item">
-              <span className="pca-ksel-thresh" style={{ fontSize: 20 }}>C</span>
+              <TeX>{`C`}</TeX>
               <span className="label-mono"> 超參數，控制寬鬆程度</span>
             </div>
           </div>

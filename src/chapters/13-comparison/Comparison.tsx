@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MaskReveal } from "../../components/MaskReveal";
+import { TeX } from "../../components/TeX";
 import type { ChapterStepProps } from "../../registry/types";
 import "./Comparison.css";
 
@@ -93,7 +94,10 @@ function ScenePerf() {
           ))}
         </div>
         <div className="cp-perf-r2">
-          <div className="label-mono cp-chart-title">調整 R²</div>
+          <div className="label-mono cp-chart-title">
+            調整 <TeX>{`R^2`}</TeX>
+            <span className="cp-r2-explain"> — 預測回歸中情感分數對個股超額收益的解釋力</span>
+          </div>
           {PERF_DATA.map((d, i) => (
             <div key={d.name} className="cp-r2-row">
               <div className="cp-bar-label">{d.name}</div>
@@ -104,7 +108,14 @@ function ScenePerf() {
           ))}
         </div>
       </div>
-      <MaskReveal show={shown} delay={600} duration={600}>
+      <MaskReveal show={shown} delay={500} duration={600}>
+        <div className="cp-r2-def card">
+          <span className="label-mono">
+            <TeX>{`\\bar{R}^2`}</TeX> 含義：用情感分數對當天個股 beta 調整收益做預測回歸，<TeX>{`\\bar{R}^2`}</TeX> 越高 → 情感分數越能解釋個股橫截面收益差異
+          </span>
+        </div>
+      </MaskReveal>
+      <MaskReveal show={shown} delay={700} duration={600}>
         <div className="cp-perf-note">
           FarmPredict 日均 31 bps vs BERT 13 bps · 差距 18 bps · 統計顯著 p &lt; 0.01
         </div>
@@ -137,6 +148,16 @@ function ScenePretraining() {
       </div>
       <MaskReveal show duration={600}>
         <h2 className="cp-pretrain-title">預訓練 vs 隨機初始化</h2>
+      </MaskReveal>
+      <MaskReveal show delay={200} duration={600}>
+        <div className="cp-pretrain-def card">
+          <span className="label-mono cp-pd-label">什麼是預訓練？</span>
+          <span className="cp-pd-text">
+            在大規模通用語料（如整個中文維基百科 + 百度百科）上先訓練語言模型，讓它學會「詞義、語法、語境」——
+            再拿這個已有語言知識的模型，去做特定的金融預測任務。
+            類比：讓一個中文母語者去學金融術語，和讓一個完全不懂中文的人從零學語言再學金融——前者只需補知識，後者語言和知識都要從頭學起。預訓練賦予的是語言理解能力，隨機初始化的模型就像那個連語言都不懂的人。
+          </span>
+        </div>
       </MaskReveal>
       <div className="cp-pretrain-chart">
         {PRETRAIN_DATA.map((d, i) => (
@@ -200,6 +221,16 @@ function SceneMomentum() {
       </div>
       <MaskReveal show duration={600}>
         <h2 className="cp-mom-title">動量在 A 股完全反向</h2>
+      </MaskReveal>
+      <MaskReveal show delay={200} duration={600}>
+        <div className="cp-mom-def card">
+          <span className="label-mono cp-md-label">為什麼要跟動量比？</span>
+          <span className="cp-md-text">
+            最常見的質疑：FarmPredict 捕捉的是不是動量效應的包裝——它選的多頭本來就是近期漲得好的股票，文本只是間接反映了過去的收益？
+            排除這個質疑最直接的辦法：把純動量策略跑一遍做對比。
+            以股票過去 1 週、1 個月、3 個月的累積收益作為排序信號，同樣多頭前 50 空頭後 50（Jegadeesh &amp; Titman 1993 方法）。
+          </span>
+        </div>
       </MaskReveal>
       <div className="cp-mom-bars">
         {MOMENTUM_DATA.map((d, i) => (
@@ -273,7 +304,8 @@ function SceneMechanism() {
       </div>
       <MaskReveal show={lit >= 3} delay={200} duration={600}>
         <div className="cp-mech-note">
-          動量在美股（機構主導）有效，在 A 股（散戶主導）失效——制度和投資者結構決定信號方向
+          動量失效排除了「FarmPredict 只是動量包裝」的質疑——兩者信號截然不同。
+          動量在美股（機構主導）有效，在 A 股（散戶主導）完全失效：制度和投資者結構決定信號方向。
         </div>
       </MaskReveal>
     </div>

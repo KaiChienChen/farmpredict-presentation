@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MaskReveal } from "../../components/MaskReveal";
+import { TeX } from "../../components/TeX";
 import type { ChapterStepProps } from "../../registry/types";
 import "./MethodStep3.css";
 
@@ -25,26 +26,26 @@ function SceneModel() {
         <h2 className="ms3-model-title">建立預測模型</h2>
       </MaskReveal>
       <div className="ms3-model-eq">
-        <span className={`ms3-eq-part${phase >= 1 ? " is-lit" : ""}`}>Y<sub>i</sub></span>
-        <span className="ms3-eq-op"> = </span>
-        <span className={`ms3-eq-part${phase >= 1 ? " is-lit" : ""}`}>a</span>
+        <span className={`ms3-eq-part${phase >= 1 ? " is-lit" : ""}`}>
+          <TeX>{`Y_i = a`}</TeX>
+        </span>
         <span className="ms3-eq-op"> + </span>
         <span className={`ms3-eq-part ms3-eq-part--b${phase >= 2 ? " is-lit" : ""}`}>
-          b<sup>T</sup> f<sub>i</sub>
+          <TeX>{`b^{\\top} f_i`}</TeX>
         </span>
         <span className="ms3-eq-op"> + </span>
         <span className={`ms3-eq-part ms3-eq-part--c${phase >= 3 ? " is-lit" : ""}`}>
-          β<sup>T</sup> u<sub>i,Ŝ</sub>
+          <TeX>{`\\beta^{\\top} u_{i,\\hat{S}}`}</TeX>
         </span>
-        <span className="ms3-eq-op"> + ε<sub>i</sub></span>
+        <span className="ms3-eq-op"> + <TeX>{`\\varepsilon_i`}</TeX></span>
       </div>
       <div className="ms3-model-legend">
         <div className={`ms3-legend-row${phase >= 2 ? " is-shown" : ""}`}>
-          <span className="ms3-legend-sym ms3-legend-sym--b">b<sup>T</sup> f<sub>i</sub></span>
+          <span className="ms3-legend-sym ms3-legend-sym--b"><TeX>{`b^{\\top} f_i`}</TeX></span>
           <span className="ms3-legend-desc">9 個因子的線性組合（話題控制部分）</span>
         </div>
         <div className={`ms3-legend-row ms3-legend-row--c${phase >= 3 ? " is-shown" : ""}`}>
-          <span className="ms3-legend-sym ms3-legend-sym--c">β<sup>T</sup> u<sub>i,Ŝ</sub></span>
+          <span className="ms3-legend-sym ms3-legend-sym--c"><TeX>{`\\beta^{\\top} u_{i,\\hat{S}}`}</TeX></span>
           <span className="ms3-legend-desc">~1000 個情感詞殘差的線性組合（情感信號部分）</span>
         </div>
       </div>
@@ -82,10 +83,7 @@ function SceneLasso() {
         <div className="ms3-lasso-left">
           <MaskReveal show duration={600}>
             <div className="ms3-lasso-eq">
-              min &nbsp;
-              <span style={{ fontSize: "0.9em" }}>
-                1/n Σ(…)<sup>2</sup> + λ₁‖β‖₁ + λ₂‖b‖₁
-              </span>
+              <TeX>{`\\min_{\\beta,b} \\; \\tfrac{1}{n}\\sum_i(\\cdots)^2 + \\lambda_1\\|\\beta\\|_1 + \\lambda_2\\|b\\|_1`}</TeX>
             </div>
           </MaskReveal>
           <div className="ms3-lasso-note">
@@ -242,52 +240,66 @@ function SceneScore() {
   );
 }
 
-/* ── Step 4 · Full comparison ────────────────────────────────────────── */
-function SceneFullCompare() {
-  const [shown, setShown] = useState(false);
+/* ── Step 4 · Framework extensibility ───────────────────────────────── */
+function SceneExtensible() {
+  const [lit, setLit] = useState(0);
   useEffect(() => {
-    const t = setTimeout(() => setShown(true), 300);
-    return () => clearTimeout(t);
+    const timers = [
+      setTimeout(() => setLit(1), 400),
+      setTimeout(() => setLit(2), 900),
+      setTimeout(() => setLit(3), 1400),
+    ];
+    return () => timers.forEach(clearTimeout);
   }, []);
 
-  const rows = [
-    { dim: "篩詞方式", sestm: "邊際篩選", farm: "條件篩選（控制因子）" },
-    { dim: "話題建模", sestm: "兩話題先驗假設", farm: "PCA 自動選因子數" },
-    { dim: "估計步驟", sestm: "兩步（篩詞 → MLE）", farm: "一步（LASSO 直接回歸）" },
-    { dim: "預測器", sestm: "情感分數（固定）", farm: "可換 NN / 其他 ML" },
-    { dim: "統計假設", sestm: "兩話題混合模型", farm: "稀疏線性（最少假設）" },
+  const variants = [
+    { label: "LASSO（本文）", desc: "稀疏線性，可解釋性高", tag: "基準", color: "var(--accent)" },
+    { label: "神經網路 / BERT", desc: "非線性捕捉複雜語義", tag: "可替換" },
+    { label: "隨機森林 / XGBoost", desc: "樹模型，處理交互特徵", tag: "可替換" },
   ];
 
   return (
     <div className="ms3-scene scene-pad ms3-scene--full-compare">
       <div className="ms3-header">
-        <div className="kicker">Chapter 08 · 完整對比總結</div>
+        <div className="kicker">Chapter 08 · 框架的可延伸性</div>
         <hr className="rule" style={{ marginTop: 16 }} />
       </div>
       <MaskReveal show duration={600}>
-        <h2 className="ms3-fc-title">FarmPredict vs SESTM</h2>
+        <h2 className="ms3-fc-title">Step 3 可以替換為任何預測模型</h2>
       </MaskReveal>
-      <div className={`ms3-fc-table${shown ? " is-shown" : ""}`}>
-        <div className="ms3-fc-head">
-          <div className="ms3-fc-dim label-mono" />
-          <div className="ms3-fc-col label-mono">SESTM</div>
-          <div className="ms3-fc-col ms3-fc-col--farm label-mono">FarmPredict</div>
-        </div>
-        {rows.map((r, i) => (
-          <div
-            key={r.dim}
-            className="ms3-fc-row"
-            style={{ animationDelay: `${i * 80}ms` }}
-          >
-            <div className="ms3-fc-dim label-mono">{r.dim}</div>
-            <div className="ms3-fc-col">{r.sestm}</div>
-            <div className="ms3-fc-col ms3-fc-col--farm">{r.farm}</div>
+      <div className="ms3-ext-layout">
+        <div className="ms3-ext-fixed card">
+          <div className="label-mono ms3-ext-fixed-label">固定不變（核心貢獻）</div>
+          <div className="ms3-ext-steps">
+            <div className={`ms3-ext-step${lit >= 1 ? " is-lit" : ""}`}>
+              <span className="label-mono" style={{ color: "var(--accent)" }}>Step 1</span>
+              <span> PCA 提取因子 + 殘差</span>
+            </div>
+            <div className={`ms3-ext-step${lit >= 2 ? " is-lit" : ""}`}>
+              <span className="label-mono" style={{ color: "#b45309" }}>Step 2</span>
+              <span> 條件篩選情感詞</span>
+            </div>
           </div>
-        ))}
+        </div>
+        <div className="ms3-ext-arrow">↓</div>
+        <div className="ms3-ext-variants">
+          <div className="label-mono ms3-ext-variants-label">Step 3 可替換的預測器</div>
+          {variants.map((v, i) => (
+            <div
+              key={v.label}
+              className={`ms3-ext-variant card${lit >= 3 ? " is-shown" : ""}`}
+              style={{ transitionDelay: `${i * 150}ms`, borderLeft: v.color ? `3px solid ${v.color}` : undefined }}
+            >
+              <div className="ms3-ext-variant-name">{v.label}</div>
+              <div className="label-mono ms3-ext-variant-tag">{v.tag}</div>
+              <div className="label-mono ms3-ext-variant-desc">{v.desc}</div>
+            </div>
+          ))}
+        </div>
       </div>
-      <MaskReveal show={shown} delay={500} duration={600}>
+      <MaskReveal show={lit >= 3} delay={300} duration={600}>
         <div className="ms3-fc-note">
-          框架通用：最後一步可換神經網路 / 隨機森林 / 任何預測模型，前兩步邏輯不變
+          LASSO 在本文表現最好——但框架的前兩步（因子提取 + 條件篩選）是通用的，不依賴第三步的具體實現
         </div>
       </MaskReveal>
     </div>
@@ -300,5 +312,5 @@ export default function MethodStep3Chapter({ step }: ChapterStepProps) {
   if (step === 1) return <SceneLasso />;
   if (step === 2) return <SceneRidge />;
   if (step === 3) return <SceneScore />;
-  return <SceneFullCompare />;
+  return <SceneExtensible />;
 }

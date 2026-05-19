@@ -259,11 +259,27 @@
 }
 
 /* ── Step 4 · Panel ─────────────────────────────────────────────────────── */
+.sw-panel-formula {
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+.sw-panel-formula-label { font-size: 15px; margin-bottom: 8px; }
+.sw-panel-formula-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 10px;
+  font-size: 16px;
+  color: var(--text-mute);
+}
+.sw-panel-formula-legend .label-mono {
+  text-transform: none;
+}
 .sw-panel-layout {
   flex: 1;
   display: flex;
   gap: 32px;
-  margin-top: 20px;
   align-items: flex-start;
 }
 .sw-panel-left, .sw-panel-right { flex: 1; }

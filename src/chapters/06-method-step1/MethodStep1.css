@@ -359,9 +359,9 @@
 
 .ms1-formula-row {
   display: grid;
-  grid-template-columns: 40px 1fr auto;
-  align-items: center;
-  gap: 24px;
+  grid-template-columns: 40px 1fr;
+  align-items: start;
+  gap: 8px 24px;
   padding: 20px 28px;
   animation: ms1-formula-in 500ms var(--ease-quart) both;
 }
@@ -369,6 +369,8 @@
 .ms1-formula-num {
   font-size: 25px;
   font-weight: 700;
+  grid-row: span 3;
+  padding-top: 4px;
 }
 
 .ms1-formula-eq {
@@ -393,11 +395,18 @@
 }
 
 .ms1-formula-note {
-  font-size: 17px;
-  color: var(--text-faint);
-  max-width: 300px;
-  text-align: right;
+  font-size: 16px;
+  color: var(--text-mute);
+  text-align: left;
   line-height: 1.5;
+}
+
+.ms1-formula-detail {
+  font-size: 14px;
+  color: var(--text-faint);
+  line-height: 1.6;
+  border-top: 1px solid var(--rule);
+  padding-top: 8px;
 }
 
 .ms1-pca-note {

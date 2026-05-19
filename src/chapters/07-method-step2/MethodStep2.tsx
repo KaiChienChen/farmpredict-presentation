@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { MaskReveal } from "../../components/MaskReveal";
+import { TeX } from "../../components/TeX";
 import type { ChapterStepProps } from "../../registry/types";
 import "./MethodStep2.css";
 
@@ -124,31 +125,28 @@ function SceneFormula() {
       </div>
       <div className="ms2-formula-block">
         <div className="ms2-formula-eq">
-          <span className={`ms2-f-part${phase >= 1 ? " is-lit" : ""}`}>Ŝ</span>
-          <span className="ms2-f-eq"> = </span>
           <span className={`ms2-f-part${phase >= 1 ? " is-lit" : ""}`}>
-            &#123;j : |corr(Û<sub>j</sub>, Ŷ<sub>u</sub>)| &gt; α&#125;
+            <TeX>{`\\hat{S} = \\{j : |\\mathrm{corr}(\\hat{U}_j,\\, \\hat{Y}_u)| > \\alpha\\}`}</TeX>
           </span>
-          <span className="ms2-f-cap"> ∩ </span>
           <span className={`ms2-f-part ms2-f-part--b${phase >= 2 ? " is-lit" : ""}`}>
-            &#123;j : k<sub>j</sub> ≥ κ&#125;
+            <TeX>{`\\cap\\; \\{j : k_j \\geq \\kappa\\}`}</TeX>
           </span>
         </div>
         <div className="ms2-formula-legend">
           <div className={`ms2-legend-item${phase >= 1 ? " is-shown" : ""}`}>
-            <span className="ms2-legend-sym">Û<sub>j</sub></span>
+            <span className="ms2-legend-sym"><TeX>{`\\hat{U}_j`}</TeX></span>
             <span className="ms2-legend-desc">詞 j 在文章中的特異殘差（控制話題後）</span>
           </div>
           <div className={`ms2-legend-item${phase >= 1 ? " is-shown" : ""}`}>
-            <span className="ms2-legend-sym">Ŷ<sub>u</sub></span>
+            <span className="ms2-legend-sym"><TeX>{`\\hat{Y}_u`}</TeX></span>
             <span className="ms2-legend-desc">個股特異收益（Y 對因子回歸後的殘差）</span>
           </div>
           <div className={`ms2-legend-item ms2-legend-item--b${phase >= 2 ? " is-shown" : ""}`}>
-            <span className="ms2-legend-sym">κ</span>
+            <span className="ms2-legend-sym"><TeX>{`\\kappa`}</TeX></span>
             <span className="ms2-legend-desc">詞頻下限（約 14% 分位數，~10K 詞）</span>
           </div>
           <div className={`ms2-legend-item ms2-legend-item--b${phase >= 2 ? " is-shown" : ""}`}>
-            <span className="ms2-legend-sym">α</span>
+            <span className="ms2-legend-sym"><TeX>{`\\alpha`}</TeX></span>
             <span className="ms2-legend-desc">相關係數閾值，調至 |Ŝ| ≈ 1000 個詞</span>
           </div>
         </div>
@@ -201,49 +199,46 @@ function SceneIntuition() {
   );
 }
 
-/* ── Step 4 · FarmPredict vs SESTM ───────────────────────────────────── */
+/* ── Step 4 · Screening difference (focused) ─────────────────────────── */
 function SceneCompare() {
-  const [shown, setShown] = useState(false);
+  const [phase, setPhase] = useState(0);
   useEffect(() => {
-    const t = setTimeout(() => setShown(true), 300);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => setPhase(1), 400);
+    const t2 = setTimeout(() => setPhase(2), 1100);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
-
-  const rows = [
-    { dim: "篩選方式", sestm: "邊際篩選（直接 corr(詞, Y)）", farm: "條件篩選（corr(Û_j, Ŷ_u)）" },
-    { dim: "因子控制", sestm: "無", farm: "先回歸因子，取殘差" },
-    { dim: "話題假設", sestm: "兩話題先驗", farm: "無假設，PCA 自動選 k" },
-    { dim: "估計步驟", sestm: "兩步（篩詞 → MLE）", farm: "一步（直接 LASSO 回歸）" },
-    { dim: "偽相關風險", sestm: "高（話題詞混入）", farm: "低（殘差去除話題成分）" },
-  ];
 
   return (
     <div className="ms2-scene scene-pad ms2-scene--compare">
       <div className="ms2-header">
-        <div className="kicker">Chapter 07 · FarmPredict vs SESTM</div>
+        <div className="kicker">Chapter 07 · 條件篩選 vs 邊際篩選（SESTM）</div>
         <hr className="rule" style={{ marginTop: 16 }} />
       </div>
       <MaskReveal show duration={600}>
-        <h2 className="ms2-compare-title">條件篩選 vs 邊際篩選</h2>
+        <h2 className="ms2-compare-title">篩詞上的根本差別</h2>
       </MaskReveal>
-      <div className={`ms2-compare-table${shown ? " is-shown" : ""}`}>
-        <div className="ms2-compare-head">
-          <div className="ms2-compare-dim label-mono" />
-          <div className="ms2-compare-col label-mono">SESTM</div>
-          <div className="ms2-compare-col label-mono ms2-compare-col--farm">FarmPredict</div>
-        </div>
-        {rows.map((r, i) => (
-          <div
-            key={r.dim}
-            className="ms2-compare-row"
-            style={{ animationDelay: `${i * 100}ms` }}
-          >
-            <div className="ms2-compare-dim label-mono">{r.dim}</div>
-            <div className="ms2-compare-col ms2-compare-col--sestm">{r.sestm}</div>
-            <div className="ms2-compare-col ms2-compare-col--farm">{r.farm}</div>
+      <div className="ms2-diff-layout">
+        <div className={`ms2-diff-box card ms2-diff-box--sestm${phase >= 1 ? " is-shown" : ""}`}>
+          <div className="label-mono ms2-diff-label">SESTM（邊際篩選）</div>
+          <div className="ms2-diff-formula">corr(詞<sub>j</sub>, Y) &gt; α</div>
+          <div className="ms2-diff-verdict ms2-diff-verdict--bad">
+            問題：話題詞因為「正好在漲股票的文章裡」而被選中，不代表真正的個股情感信號
           </div>
-        ))}
+        </div>
+        <div className="ms2-diff-arrow">vs</div>
+        <div className={`ms2-diff-box card ms2-diff-box--farm${phase >= 2 ? " is-shown" : ""}`}>
+          <div className="label-mono ms2-diff-label">FarmPredict（條件篩選）</div>
+          <div className="ms2-diff-formula">corr(Û<sub>j</sub>, Ŷ<sub>u</sub>) &gt; α</div>
+          <div className="ms2-diff-verdict ms2-diff-verdict--good">
+            先控制話題因子再篩詞——選出的是「在任何話題背景下都有個股預測力」的真正情感詞
+          </div>
+        </div>
       </div>
+      <MaskReveal show={phase >= 2} delay={200} duration={600}>
+        <div className="ms2-diff-note">
+          完整的 FarmPredict vs SESTM 對比見「方法論概覽」章節
+        </div>
+      </MaskReveal>
     </div>
   );
 }
